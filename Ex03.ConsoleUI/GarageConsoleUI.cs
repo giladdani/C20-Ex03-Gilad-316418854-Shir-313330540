@@ -9,7 +9,7 @@ namespace Ex03.ConsoleUI
     {
         // Private Members
         private Garage m_Garage;
-        private const int k_MinMenuOptionValue = 1; // @ use ValueOutOfRangeException?
+        private const int k_MinMenuOptionValue = 1;
         private const int k_MaxMenuOptionValue = 8;
 
         // Public Methods
@@ -92,13 +92,13 @@ namespace Ex03.ConsoleUI
             {
                 case eMenuOptions.InsertVehicleToGarage:
                     {
-                        insertVehicleToGarage(); // @ need to finish function
+                        insertVehicleToGarage();
                         break;
                     }
 
                 case eMenuOptions.ShowLicenseNumbersByFilter:
                     {
-                        showLicenseNumbersByFilter(); // @ need to finish function
+                        showLicenseNumbersByFilter();
                         break;
                     }
 
@@ -149,12 +149,28 @@ namespace Ex03.ConsoleUI
         private void fillGasVehicleFuel()
         {
             string licenseNumber = getLicenseNumberFromUser();
-            m_Garage.IsVehicleInGarage(licenseNumber);
-            int fuelType = getFuelTypeFromUser();
-            m_Garage.fillGasVehicleFuel(licenseNumber);
+            if(!m_Garage.IsVehicleInGarage(licenseNumber))
+            {
+                Console.WriteLine("Vehicle was not found in garage.");
+            }
+            else
+            {
+                int fuelType = getFuelTypeFromUser();
+                float fuelAmount = getFuelAmountFromUser();
+                try
+                {
+                    m_Garage.FillGasVehicleFuel(licenseNumber, fuelType, fuelAmount);
+                }
+                catch(ArgumentException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+                catch(ValueOutOfRangeException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+            }
         }
-
-    
 
         private void insertVehicleToGarage()
         {
@@ -172,6 +188,7 @@ namespace Ex03.ConsoleUI
 
             PrintMenu();
         }
+
         private void changeVehicleStatus()
         {
             string licenseNumber = getLicenseNumberFromUser();
@@ -182,25 +199,31 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new Exception("There is no vehicle with this license number in the garage");
+                Console.WriteLine("Vehicle was not found in garage.");
             }
-
         }
 
         private void fillMaxAirToVehicleWheels()
         {
             string licenseNumber = getLicenseNumberFromUser();
-            m_Garage.IsVehicleInGarage(licenseNumber);
-            m_Garage.fillMaxAirToVehicleWheels(licenseNumber);
-
+            if(m_Garage.IsVehicleInGarage(licenseNumber))
+            {
+                m_Garage.FillMaxAirToVehicleWheels(licenseNumber);
+            }
+            else
+            {
+                Console.WriteLine("Vehicle was not found in garage.");
+            }
         }   
+
         private string getLicenseNumberFromUser()
         {
             Console.WriteLine("Enter License number: ");
             string licenseNumber = Console.ReadLine();
             while(!isStringDigitsOnly(licenseNumber))
             {
-                Console.WriteLine("License number must be digits only, enter license number: ");
+                Console.WriteLine("License number must be digits only.");
+                Console.WriteLine("Enter License number: ");
                 licenseNumber = Console.ReadLine();
             }
 
@@ -210,7 +233,6 @@ namespace Ex03.ConsoleUI
         private int getFuelTypeFromUser()
         {
             Console.WriteLine("Enter fuel type: ");
-            int fuelType;
             StringBuilder stringOfFuelTypes = new StringBuilder();
             foreach (object FuelTypeObject in Enum.GetValues(typeof(GasEngine.eFuelType)))
             {
@@ -223,7 +245,7 @@ namespace Ex03.ConsoleUI
             }
 
             Console.WriteLine(stringOfFuelTypes);
-            fuelType = int.Parse(Console.ReadLine());
+            int fuelType = int.Parse(Console.ReadLine());
             while (!GasEngine.IsFuelTypeInRange(fuelType))
             {
                 Console.WriteLine("Invalid choice. Enter a valid fuel type");
@@ -232,12 +254,26 @@ namespace Ex03.ConsoleUI
             }
             return fuelType;
         }
+
+        private float getFuelAmountFromUser()
+        {
+            float fuelAmount;
+            string userInput = Console.ReadLine();
+            while(!float.TryParse(userInput, out fuelAmount) || fuelAmount < 0)
+            {
+                Console.WriteLine("Please enter a valid positive fuel amount: ");
+                userInput = Console.ReadLine();
+            }
+
+            return fuelAmount;
+        }
+
         private void createVehicle(string i_LicenseNumber)
         {
             string vehicleType = getVehicleTypeFromUser();
             getOwnerDetailsFromUser(out string ownerName, out string ownerPhoneNumber);
             Vehicle newVehicle = VehicleGenerator.CreateVehicle(i_LicenseNumber, vehicleType);
-
+            // @ continue this method
         }
 
         private string getVehicleTypeFromUser()

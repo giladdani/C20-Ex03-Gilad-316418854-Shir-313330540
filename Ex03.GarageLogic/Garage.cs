@@ -7,8 +7,8 @@ namespace Ex03.GarageLogic
     {
         // Private Members
         private Dictionary<string, GarageVehicle> m_GarageVehicles;
-        private int m_MinVehicleStatusValue;
-        private int m_MaxVehicleStatusValue;
+        private const int k_MinVehicleStatusValue = 1;
+        private const int k_MaxVehicleStatusValue = 3;
 
         // Enums
         public enum eVehicleStatus
@@ -84,7 +84,7 @@ m_OwnerVehicle.ToString());
 
         public void UpdateVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewStatus)
         {
-            m_GarageVehicles[i_LicenseNumber].Status = i_NewStatus;
+            m_GarageVehicles[i_LicenseNumber].VehicleStatus = i_NewStatus;
         }
 
         public List<string> GetLicenseNumberListByStatus(int i_StatusFilter)
@@ -101,7 +101,7 @@ m_OwnerVehicle.ToString());
             {
                 foreach (GarageVehicle garageVehicle in m_GarageVehicles.Values)
                 {
-                    if(garageVehicle.Status == (eVehicleStatus)i_StatusFilter)
+                    if(garageVehicle.VehicleStatus == (eVehicleStatus)i_StatusFilter)
                     {
                         licenseList.Add(garageVehicle.OwnerVehicle.LicenseNumber);
                     }
@@ -111,10 +111,20 @@ m_OwnerVehicle.ToString());
             return licenseList;
         }
 
-        public void fillMaxAirToVehicleWheels(string i_LicenseNumber)
+        public void FillMaxAirToVehicleWheels(string i_LicenseNumber)
         {
             m_GarageVehicles[i_LicenseNumber].OwnerVehicle.FillAirInVehicleWheels();
         }
+
+        public void FillGasVehicleFuel(string i_LicenseNumber, int i_FuelType, float i_FuelAmount)
+        {
+            Vehicle vehicle = m_GarageVehicles[i_LicenseNumber].OwnerVehicle;
+            if(vehicle.VehicleEngine is GasEngine engine)
+            {
+                engine.AddFuel(i_FuelAmount, (GasEngine.eFuelType)i_FuelType);
+            }
+        }
+
         // Properties
         public Dictionary<string, GarageVehicle> GarageVehicles
         {
@@ -124,14 +134,12 @@ m_OwnerVehicle.ToString());
 
         public int MinVehicleStatusValue
         {
-            get => m_MinVehicleStatusValue;
-            set => m_MinVehicleStatusValue = value;
+            get => k_MinVehicleStatusValue;
         }
 
         public int MaxVehicleStatusValue
         {
-            get => m_MaxVehicleStatusValue;
-            set => m_MaxVehicleStatusValue = value;
+            get => k_MaxVehicleStatusValue;
         }
     }
 }

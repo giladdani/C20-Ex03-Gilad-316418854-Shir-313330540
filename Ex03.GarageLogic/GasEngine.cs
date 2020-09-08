@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Ex03.GarageLogic
 {
@@ -7,8 +8,9 @@ namespace Ex03.GarageLogic
     {
         // Private Members
         private eFuelType m_FuelType;
-        private const int k_MinMenuOptionValue = 1; // @ use ValueOutOfRangeException?
-        private const int k_MaxMenuOptionValue = 8;
+        private const int k_MinFuelTypeValue = 1;
+        private const int k_MaxFuelTypeValue = 4;
+
         // Constructors
         public GasEngine(eFuelType i_FuelType, float i_MaxEnergyAmount) : base(i_MaxEnergyAmount)
         {
@@ -29,18 +31,11 @@ namespace Ex03.GarageLogic
         {
             if(m_FuelType == i_FuelType)
             {
-                if(m_CurrentEnergyAmount + i_FuelAmountToAdd <= m_MaxEnergyAmount)
-                {
-                    m_CurrentEnergyAmount += i_FuelAmountToAdd;
-                }
-                else
-                {
-                    // @ Throw exception
-                }
+                m_CurrentEnergyAmount += i_FuelAmountToAdd;
             }
             else
             {
-                // @ Throw exception
+                throw new ArgumentException("Wrong fuel type");
             }
         }
 
@@ -53,13 +48,23 @@ namespace Ex03.GarageLogic
         public eFuelType FuelType
         {
             get => m_FuelType;
-            set => m_FuelType = value;  // @ Add validations and exceptions
+            set
+            {
+                if(IsFuelTypeInRange((int)value))
+                {
+                    m_FuelType = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(k_MinFuelTypeValue, k_MaxFuelTypeValue, (int)value); // @ wait for Guy's answer
+                }
+            } 
         }
 
         public static bool IsFuelTypeInRange(int fuelType)
         {
             bool isTypeInRange;
-            if (fuelType >= m_FuelType. || typeAsNumber < k_MinVehicleTypeValue)
+            if (fuelType > k_MaxFuelTypeValue || fuelType < k_MinFuelTypeValue)
             {
                 isTypeInRange = false;
             }
@@ -67,9 +72,8 @@ namespace Ex03.GarageLogic
             {
                 isTypeInRange = true;
             }
-            return isTypeInRange;
 
+            return isTypeInRange;
         }
-       
     }
 }

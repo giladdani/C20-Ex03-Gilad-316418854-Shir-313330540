@@ -26,13 +26,19 @@ namespace Ex03.GarageLogic
         public float CurrentEnergyAmount
         {
             get => m_CurrentEnergyAmount;
-            set => m_CurrentEnergyAmount = value;   // @ add validations and exceptions
+            set
+            {
+                if(m_CurrentEnergyAmount + value > m_MaxEnergyAmount)
+                {
+                    throw new ValueOutOfRangeException(0, m_MaxEnergyAmount - m_CurrentEnergyAmount, value);
+                }
+            }
         }
 
         public float MaxEnergyAmount
         {
             get => m_MaxEnergyAmount;
-            set => m_MaxEnergyAmount = value;   // @ add validations and exceptions
+            set => m_MaxEnergyAmount = value;
         }
     }
 }
