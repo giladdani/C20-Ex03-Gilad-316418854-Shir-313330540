@@ -65,5 +65,13 @@ namespace Ex03.GarageLogic
             get => (m_Engine.MaxEnergyAmount / m_Engine.CurrentEnergyAmount);
             set => m_EnergyPercentageLeft = value;
         }
+        
+        public void FillAirInVehicleWheels()
+        {
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheel.FillToMaxAir();
+            }
+        }
     }
 }

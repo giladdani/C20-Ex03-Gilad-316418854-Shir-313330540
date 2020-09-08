@@ -20,14 +20,13 @@ namespace Ex03.GarageLogic
         // Public Methods
         public void AddAir(float i_AirToAdd)
         {
-            if(i_AirToAdd < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(i_AirToAdd));      // @ exception like this?
-            }
-
-            else if(m_CurrentAirPressure + i_AirToAdd <= m_MaxAirPressure)
+            if(m_CurrentAirPressure + i_AirToAdd <= m_MaxAirPressure)
             {
                 m_CurrentAirPressure += i_AirToAdd;
+            }
+            else 
+            {
+                throw new ArgumentOutOfRangeException(nameof(i_AirToAdd));      // @ exception like this?
             }
         }
 
@@ -38,6 +37,14 @@ namespace Ex03.GarageLogic
                 m_Manufacturer,
                 m_CurrentAirPressure,
                 m_MaxAirPressure);
+        }
+
+        public void FillToMaxAir()
+        {
+            if (m_CurrentAirPressure < m_MaxAirPressure)
+            {
+                AddAir(m_MaxAirPressure - m_CurrentAirPressure);
+            }
         }
     }
 }

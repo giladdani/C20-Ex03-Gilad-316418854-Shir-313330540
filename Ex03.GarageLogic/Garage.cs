@@ -111,6 +111,10 @@ m_OwnerVehicle.ToString());
             return licenseList;
         }
 
+        public void fillMaxAirToVehicleWheels(string i_LicenseNumber)
+        {
+            m_GarageVehicles[i_LicenseNumber].OwnerVehicle.FillAirInVehicleWheels();
+        }
         // Properties
         public Dictionary<string, GarageVehicle> GarageVehicles
         {
