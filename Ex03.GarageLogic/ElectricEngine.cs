@@ -22,5 +22,10 @@ namespace Ex03.GarageLogic
                 // @ Throw exception
             }
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

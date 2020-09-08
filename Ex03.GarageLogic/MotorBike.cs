@@ -24,6 +24,13 @@ namespace Ex03.GarageLogic
         {
         }
 
+        // Public Methods
+        public override string ToString()
+        {
+            return string.Format("{0}License Type: {1}, Engine Capacity: {2}{3}",
+                base.ToString(), m_LicenseType, m_EngineCapacity, Environment.NewLine);
+        }
+
         // Properties
         public eLicenseType LicenseType
         {
