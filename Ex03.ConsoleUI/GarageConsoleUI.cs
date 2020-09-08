@@ -53,7 +53,14 @@ namespace Ex03.ConsoleUI
         // Private Methods
         private void chooseOptionFromMenu()
         {
-            int choosenOption = int.Parse(Console.ReadLine());
+      
+            while (!int.TryParse(Console.ReadLine(), out choosenOption) && (choosenOption < k_MinMenuOptionValue || choosenOption > k_MaxMenuOptionValue))
+            {
+                Console.WriteLine(string.Format("Invalid Choice. Enter a value in range {0} to {1}.", k_MinMenuOptionValue, k_MaxMenuOptionValue));
+            }
+            runGarageFunction((eMenuOptions)choosenOption);
+
+            /*int choosenOption = int.Parse(Console.ReadLine());
             try
             {
                 while (choosenOption < k_MinMenuOptionValue || choosenOption > k_MaxMenuOptionValue)
@@ -64,7 +71,7 @@ namespace Ex03.ConsoleUI
 
                 runGarageFunction((eMenuOptions)choosenOption);
             }
-            catch (ValueOutOfRangeException voore)      // @ can we combine all of these by catching father class Exception?
+            catch (ValueOutOfRangeException voore)      // @TODO can we combine all of these by catching father class Exception?
             {
                 Console.WriteLine(voore.Message);
             }
@@ -82,8 +89,9 @@ namespace Ex03.ConsoleUI
             }
             finally
             {
-                PrintMenu();
+               
             }
+             PrintMenu();*/
         }
 
         private void runGarageFunction(eMenuOptions i_ChosenOption)
@@ -139,10 +147,10 @@ namespace Ex03.ConsoleUI
                         break;
                     }
 
-                default:
+               /* default:
                     {
                         throw new ArgumentException("Invalid option.");
-                    }
+                    }*/
             }
         }
 
@@ -169,20 +177,21 @@ namespace Ex03.ConsoleUI
             string vehicleType = getVehicleTypeFromUser();
             getOwnerDetailsFromUser(out ownerName, out ownerPhoneNumber);// @create this method
 
+
         }
 
         private string getVehicleTypeFromUser()
         {
             string chosenType;
-            Console.WriteLine("Choose vehicle type:");
+            Console.WriteLine("Choose vehicle type by number:");
             StringBuilder stringOfVehicleTypes = new StringBuilder();
             foreach (object vehicleTypeObject in Enum.GetValues(typeof(VehicleGenerator.eVehicleType)))
             {
                 stringOfVehicleTypes.Append(string.Format(
-                    "{0}. {1}{2}",
-                    (int)vehicleTypeObject,
-                    vehicleTypeObject,
-                    Environment.NewLine));
+                "{0}. {1}{2}",
+                (int)vehicleTypeObject,
+                vehicleTypeObject,
+                Environment.NewLine));
             }
 
             Console.WriteLine(stringOfVehicleTypes);
