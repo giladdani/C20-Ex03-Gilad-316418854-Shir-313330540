@@ -92,13 +92,13 @@ namespace Ex03.ConsoleUI
             {
                 case eMenuOptions.InsertVehicleToGarage:
                     {
-                        insertVehicleToGarage();
+                        insertVehicleToGarage(); // @ need to finish function
                         break;
                     }
 
                 case eMenuOptions.ShowLicenseNumbersByFilter:
                     {
-                        showLicenseNumbersByFilter();
+                        showLicenseNumbersByFilter(); // @ need to finish function
                         break;
                     }
 
@@ -244,10 +244,10 @@ namespace Ex03.ConsoleUI
         {
             string chosenType;
             Console.WriteLine("Choose vehicle type: ");
-            StringBuilder stringOfVehicleTypes = new StringBuilder();
+            StringBuilder vehicleTypesString = new StringBuilder();
             foreach (object vehicleTypeObject in Enum.GetValues(typeof(VehicleGenerator.eVehicleType)))
             {
-                stringOfVehicleTypes.Append(
+                vehicleTypesString.Append(
                     string.Format(
                     "{0}. {1}{2}",
                     (int)vehicleTypeObject,
@@ -255,7 +255,7 @@ namespace Ex03.ConsoleUI
                     Environment.NewLine));
             }
 
-            Console.WriteLine(stringOfVehicleTypes);
+            Console.WriteLine(vehicleTypesString);
             chosenType = Console.ReadLine();
             while(!VehicleGenerator.IsVehicleTypeInRange(chosenType))
             {
@@ -307,6 +307,31 @@ namespace Ex03.ConsoleUI
             int filterOption = getVehicleStatusFromUser();
             List<string> filteredLicenseNumberList = getLicenseNumberListByStatus(filterOption);
             printLicenseNumbersList(filteredVehiclesList);
+        }
+
+        private int getVehicleStatusFromUser()
+        {
+            Console.WriteLine("Choose vehicle status:");
+            StringBuilder vehicleStatusString = new StringBuilder();
+            foreach (object vehicleStatusObject in Enum.GetValues(typeof(Garage.eVehicleStatus)))
+            {
+                vehicleStatusString.Append(
+                    string.Format(
+                    "{0}. {1}{2}",
+                    (int)vehicleStatusObject,
+                    vehicleStatusObject,
+                    Environment.NewLine));
+            }
+
+            Console.WriteLine(vehicleTypesString);
+            chosenType = Console.ReadLine();
+            while (!VehicleGenerator.IsVehicleTypeInRange(chosenType))
+            {
+                Console.WriteLine("Invalid choice. Enter a valid number in range");
+                chosenType = Console.ReadLine();
+            }
+
+            return chosenType;
         }
     }
 }
