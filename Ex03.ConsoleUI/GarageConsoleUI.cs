@@ -53,20 +53,20 @@ namespace Ex03.ConsoleUI
         // Private Methods
         private void chooseOptionFromMenu()
         {
-            int choosenOption = int.Parse(Console.ReadLine());
-            while (choosenOption < k_MinMenuOptionValue || choosenOption > k_MaxMenuOptionValue)
-            {
-                Console.WriteLine(string.Format("Invalid Choice. Enter a value in range {0} to {1}.", k_MinMenuOptionValue, k_MaxMenuOptionValue));
-                choosenOption = int.Parse(Console.ReadLine());
-            }
-
             try
             {
-                runGarageFunction((eMenuOptions)choosenOption);
+                int chosenOption = int.Parse(Console.ReadLine());
+                while (chosenOption < k_MinMenuOptionValue || chosenOption > k_MaxMenuOptionValue)
+                {
+                    Console.WriteLine(string.Format("Invalid Choice. Enter a value in range {0} to {1}.", k_MinMenuOptionValue, k_MaxMenuOptionValue));
+                    chosenOption = int.Parse(Console.ReadLine());
+                }
+
+                runGarageFunction((eMenuOptions)chosenOption);
             }
-            catch (ValueOutOfRangeException ValueOutOfRangeException)
+            catch (ValueOutOfRangeException valueOutOfRangeException)
             {
-                Console.WriteLine(ValueOutOfRangeException.Message);
+                Console.WriteLine(valueOutOfRangeException.Message);
             }
             catch (ArgumentException argumentException)
             {
@@ -186,7 +186,6 @@ namespace Ex03.ConsoleUI
 
         private string getVehicleTypeFromUser()
         {
-            string chosenType;
             Console.WriteLine("Choose vehicle type: ");
             StringBuilder vehicleTypesString = new StringBuilder();
             foreach (object vehicleTypeObject in Enum.GetValues(typeof(VehicleGenerator.eVehicleType)))
@@ -200,7 +199,7 @@ namespace Ex03.ConsoleUI
             }
 
             Console.WriteLine(vehicleTypesString);
-            chosenType = Console.ReadLine();
+            string chosenType = Console.ReadLine();
             while(!VehicleGenerator.IsVehicleTypeInRange(chosenType))
             {
                 Console.WriteLine("Invalid choice. Enter a valid number in range");
@@ -210,9 +209,9 @@ namespace Ex03.ConsoleUI
             return chosenType;
         }
 
-        private void getOwnerDetailsFromUser(out string io_OwnerNamem, out string io_OwnerPhoneNumber)
+        private void getOwnerDetailsFromUser(out string io_OwnerName, out string io_OwnerPhoneNumber)
         {
-            string ownerName, phoneNumber;
+            string ownerName;
             do
             {
                 Console.WriteLine("Enter vehicle owner name: ");
@@ -221,22 +220,22 @@ namespace Ex03.ConsoleUI
             while (string.IsNullOrEmpty(ownerName));
 
             Console.WriteLine("Enter owner phone number: ");
-            phoneNumber = Console.ReadLine();
+            string phoneNumber = Console.ReadLine();
             while(string.IsNullOrEmpty(phoneNumber) || !isStringDigitsOnly(phoneNumber))
             {
                 Console.WriteLine("Please enter numbers only: ");
             }
 
-            io_OwnerNamem = ownerName;
+            io_OwnerName = ownerName;
             io_OwnerPhoneNumber = phoneNumber;
         }
 
         private bool isStringDigitsOnly(string i_String)
         {
             bool isDigitsOnly = true;
-            for (int i = 0; i < i_String.Length; i++)
+            foreach(char character in i_String)
             {
-                if(!char.IsDigit(i_String[i]))
+                if(!char.IsDigit(character))
                 {
                     isDigitsOnly = false;
                 }
@@ -247,14 +246,35 @@ namespace Ex03.ConsoleUI
 
         private void showLicenseNumbersByFilter()
         {
-            Console.WriteLine(string.Format("Filter by vehicle status:{0}1. In Repair{0}Fixed{0}Paid{0}Show All", Environment.NewLine));
-            int filterOption = getVehicleStatusFromUser();
-            List<string> filteredLicenseNumberList = getLicenseNumberListByStatus(filterOption);
-            printLicenseNumbersList(filteredVehiclesList);
+            int chosenFilter;
+            Console.WriteLine(string.Format("Filter by vehicle status:{0}1. In Repair{0}2. Fixed{0}3. Paid{0}4. Show All", Environment.NewLine));
+            string userInput = Console.ReadLine();
+            while (!int.TryParse(userInput, out chosenFilter) && (chosenFilter > m_Garage.MaxVehicleStatusValue + 1 || chosenFilter < m_Garage.MinVehicleStatusValue))
+            {
+                Console.WriteLine("Invalid choice. Enter a valid number in range {0} to {1}", m_Garage.MinVehicleStatusValue, m_Garage.MaxVehicleStatusValue + 1);
+                userInput = Console.ReadLine();
+            }
+
+            List<string> filteredLicenseNumberList = m_Garage.GetLicenseNumberListByStatus(chosenFilter);
+            if(filteredLicenseNumberList.Count > 0)
+            {
+                StringBuilder licensesString = new StringBuilder();
+                for (int i = 0; i < filteredLicenseNumberList.Count; i++)
+                {
+                    licensesString.Append(filteredLicenseNumberList[i]);
+                    string commaOrDot = i == filteredLicenseNumberList.Count - 1 ? ". " : ", ";
+                    licensesString.Append(commaOrDot);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No licenses were found.");
+            }
         }
 
         private int getVehicleStatusFromUser()
         {
+            int chosenStatus;
             Console.WriteLine("Choose vehicle status:");
             StringBuilder vehicleStatusString = new StringBuilder();
             foreach (object vehicleStatusObject in Enum.GetValues(typeof(Garage.eVehicleStatus)))
@@ -267,15 +287,15 @@ namespace Ex03.ConsoleUI
                     Environment.NewLine));
             }
 
-            Console.WriteLine(vehicleTypesString);
-            chosenType = Console.ReadLine();
-            while (!VehicleGenerator.IsVehicleTypeInRange(chosenType))
+            Console.WriteLine(vehicleStatusString);
+            string userInput = Console.ReadLine();
+            while (!int.TryParse(userInput, out chosenStatus) && (chosenStatus > m_Garage.MaxVehicleStatusValue || chosenStatus < m_Garage.MinVehicleStatusValue))
             {
                 Console.WriteLine("Invalid choice. Enter a valid number in range");
-                chosenType = Console.ReadLine();
+                userInput = Console.ReadLine();
             }
 
-            return chosenType;
+            return chosenStatus;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Ex03.GarageLogic
             m_ModelName = i_ModelName;
             r_LicenseNumber = i_LicenseNumber;
             m_Engine = i_Engine;
+            m_Wheels = new List<Wheel>((int)i_NumberOfWheels);
             for (int i = 0; i < (int)i_NumberOfWheels; i++)
             {
                 m_Wheels.Add(new Wheel(i_WheelManufacturer, i_MaxWheelsAirPressure));   // @ really need to supply manufacturer?
@@ -36,7 +37,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-                "License number: {0}, Model: {1}, Energy Precentage: {2}%{3}Wheels: {4}{5}Engine: {6}{7}",
+                "License number: {0}, Model: {1}, Energy Percentage: {2}%{3}Wheels: {4}{5}Engine: {6}{7}",
                 r_LicenseNumber,
                 m_ModelName,
                 m_EnergyPercentageLeft,

@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         protected float m_MaxEnergyAmount;
 
         // Constructors
-        public Engine(float i_MaxEnergyAmount)
+        protected Engine(float i_MaxEnergyAmount)
         {
             m_MaxEnergyAmount = i_MaxEnergyAmount;
         }

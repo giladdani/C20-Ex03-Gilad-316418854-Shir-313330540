@@ -6,7 +6,9 @@ namespace Ex03.GarageLogic
     public class Garage
     {
         // Private Members
-        Dictionary<string, GarageVehicle> m_GarageVehicles;
+        private Dictionary<string, GarageVehicle> m_GarageVehicles;
+        private int m_MinVehicleStatusValue;
+        private int m_MaxVehicleStatusValue;
 
         // Enums
         public enum eVehicleStatus
@@ -39,14 +41,14 @@ namespace Ex03.GarageLogic
 
             public string OwnerPhoneNumber
             {
-                get => OwnerPhoneNumber;
-                set => OwnerPhoneNumber = value;
+                get => m_OwnerPhoneNumber;
+                set => m_OwnerPhoneNumber = value;
             }
 
-            public eVehicleStatus Status
+            public eVehicleStatus VehicleStatus
             {
-                get => Status;
-                set => Status = value;
+                get => m_VehicleStatus;
+                set => m_VehicleStatus = value;
             }
 
             public Vehicle OwnerVehicle
@@ -85,11 +87,47 @@ m_OwnerVehicle.ToString());
             m_GarageVehicles[i_LicenseNumber].Status = i_NewStatus;
         }
 
+        public List<string> GetLicenseNumberListByStatus(int i_StatusFilter)
+        {
+            List<string> licenseList = new List<string>();
+            if(i_StatusFilter == 0)
+            {
+                foreach (GarageVehicle garageVehicle in m_GarageVehicles.Values)
+                {
+                    licenseList.Add(garageVehicle.OwnerVehicle.LicenseNumber);
+                }
+            }
+            else
+            {
+                foreach (GarageVehicle garageVehicle in m_GarageVehicles.Values)
+                {
+                    if(garageVehicle.Status == (eVehicleStatus)i_StatusFilter)
+                    {
+                        licenseList.Add(garageVehicle.OwnerVehicle.LicenseNumber);
+                    }
+                }
+            }
+
+            return licenseList;
+        }
+
         // Properties
         public Dictionary<string, GarageVehicle> GarageVehicles
         {
             get => m_GarageVehicles;
             set => m_GarageVehicles = value;
+        }
+
+        public int MinVehicleStatusValue
+        {
+            get => m_MinVehicleStatusValue;
+            set => m_MinVehicleStatusValue = value;
+        }
+
+        public int MaxVehicleStatusValue
+        {
+            get => m_MaxVehicleStatusValue;
+            set => m_MaxVehicleStatusValue = value;
         }
     }
 }

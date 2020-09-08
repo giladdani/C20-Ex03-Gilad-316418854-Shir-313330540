@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
             B2 = 4
         }
 
-        // Constuctors
+        // Constructors
         public MotorBike(string i_ModelName, string i_LicenseNumber, string i_WheelsManufacturer, Engine i_Engine) 
             : base(i_ModelName, i_LicenseNumber, eWheelsAmount.Two, i_WheelsManufacturer, 28, i_Engine)
         {

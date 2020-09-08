@@ -6,8 +6,8 @@ namespace Ex03.GarageLogic
     public static class VehicleGenerator
     {
         // Private Members
-        private const int k_MaxVehicleTypeValue = 1;
-        private const int k_MinVehicleTypeValue = 5;
+        private const int k_MinVehicleTypeValue = 1;
+        private const int k_MaxVehicleTypeValue = 5;
 
         // Enums
         public enum eVehicleType
