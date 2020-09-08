@@ -64,21 +64,21 @@ namespace Ex03.ConsoleUI
             {
                 runGarageFunction((eMenuOptions)choosenOption);
             }
-            catch (ValueOutOfRangeException voore)      // @ can we combine all of these by catching father class Exception?
+            catch (ValueOutOfRangeException valueOutOfRangeException)      // @ can we combine all of these by catching father class Exception?
             {
-                Console.WriteLine(voore.Message);
+                Console.WriteLine(valueOutOfRangeException.Message);
             }
-            catch (ArgumentException ae)
+            catch (ArgumentException argumentException)
             {
-                Console.WriteLine(ae.Message);
+                Console.WriteLine(argumentException.Message);
             }
-            catch (FormatException fe)
+            catch (FormatException formatException)
             {
-                Console.WriteLine(fe.Message);
+                Console.WriteLine(formatException.Message);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(exception.Message);
             }
             finally
             {
@@ -146,6 +146,16 @@ namespace Ex03.ConsoleUI
             }
         }
 
+        private void fillGasVehicleFuel()
+        {
+            string licenseNumber = getLicenseNumberFromUser();
+            m_Garage.IsVehicleInGarage(licenseNumber);
+            int fuelType = getFuelTypeFromUser();
+            m_Garage.fillGasVehicleFuel(licenseNumber);
+        }
+
+    
+
         private void insertVehicleToGarage()
         {
             string licenseNumber = getLicenseNumberFromUser();
@@ -162,7 +172,28 @@ namespace Ex03.ConsoleUI
 
             PrintMenu();
         }
+        private void changeVehicleStatus()
+        {
+            string licenseNumber = getLicenseNumberFromUser();
+            if (m_Garage.IsVehicleInGarage(licenseNumber))
+            {
+                int newStatus = getVehicleStatusFromUser();
+                m_Garage.UpdateVehicleStatus(licenseNumber, (Garage.eVehicleStatus)newStatus);
+            }
+            else
+            {
+                throw new Exception("There is no vehicle with this license number in the garage");
+            }
 
+        }
+
+        private void fillMaxAirToVehicleWheels()
+        {
+            string licenseNumber = getLicenseNumberFromUser();
+            m_Garage.IsVehicleInGarage(licenseNumber);
+            m_Garage.fillMaxAirToVehicleWheels(licenseNumber);
+
+        }   
         private string getLicenseNumberFromUser()
         {
             Console.WriteLine("Enter License number: ");
@@ -176,6 +207,31 @@ namespace Ex03.ConsoleUI
             return licenseNumber;
         }
 
+        private int getFuelTypeFromUser()
+        {
+            Console.WriteLine("Enter fuel type: ");
+            int fuelType;
+            StringBuilder stringOfFuelTypes = new StringBuilder();
+            foreach (object FuelTypeObject in Enum.GetValues(typeof(GasEngine.eFuelType)))
+            {
+                stringOfFuelTypes.Append(
+                    string.Format(
+                    "{0}. {1}{2}",
+                    (int)FuelTypeObject,
+                    FuelTypeObject,
+                    Environment.NewLine));
+            }
+
+            Console.WriteLine(stringOfFuelTypes);
+            fuelType = int.Parse(Console.ReadLine());
+            while (!GasEngine.IsFuelTypeInRange(fuelType))
+            {
+                Console.WriteLine("Invalid choice. Enter a valid fuel type");
+                fuelType = int.Parse(Console.ReadLine());
+
+            }
+            return fuelType;
+        }
         private void createVehicle(string i_LicenseNumber)
         {
             string vehicleType = getVehicleTypeFromUser();

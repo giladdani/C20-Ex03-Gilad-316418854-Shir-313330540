@@ -58,13 +58,13 @@ namespace Ex03.GarageLogic
             public override string ToString()
             {
                 return string.Format(
-@"Owner name: {0}, Phone Number: {1}, Vehicle status: {2}.
-Vehicle information: {3}{4}",
-m_OwnerName,
-m_OwnerPhoneNumber,
-m_VehicleStatus.ToString(),
-Environment.NewLine,
-m_OwnerVehicle.ToString());
+                @"Owner name: {0}, Phone Number: {1}, Vehicle status: {2}.
+                Vehicle information: {3}{4}",
+                m_OwnerName,
+                m_OwnerPhoneNumber,
+                m_VehicleStatus.ToString(),
+                Environment.NewLine,
+                m_OwnerVehicle.ToString());
             }
         }
 
@@ -84,7 +84,10 @@ m_OwnerVehicle.ToString());
         {
             m_GarageVehicles[i_LicenseNumber].Status = i_NewStatus;
         }
-
+        public void fillMaxAirToVehicleWheels(string i_LicenseNumber)
+        {
+            m_GarageVehicles[i_LicenseNumber].OwnerVehicle.FillAirInVehicleWheels();
+        }
         // Properties
         public Dictionary<string, GarageVehicle> GarageVehicles
         {
