@@ -43,6 +43,11 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0}, Fuel Type: {1}", base.ToString(), FuelType);
+        }
+
         // Properties
         public eFuelType FuelType
         {

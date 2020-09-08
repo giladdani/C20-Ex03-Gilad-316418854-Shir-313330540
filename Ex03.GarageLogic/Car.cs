@@ -32,6 +32,13 @@ namespace Ex03.GarageLogic
             Five = 5
         }
 
+        // Public Methods
+        public override string ToString()
+        {
+            return string.Format("{0}Color: {1}, Number of doors: {2}{3}", 
+                base.ToString(), m_Color, m_DoorsAmount,  Environment.NewLine);
+        }
+
         // Properties
         public eColor Color
         {

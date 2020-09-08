@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
             return isTypeInRange;
         }
 
-        public static Vehicle CreateVehicle(string i_VehicleType, string i_LicenseNumber)
+        public static Vehicle CreateVehicle(string i_LicenseNumber, string i_VehicleType)
         {
             Vehicle createdVehicle;
             int converterVehicleType = int.Parse(i_VehicleType);

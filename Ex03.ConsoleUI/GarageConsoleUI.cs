@@ -9,7 +9,7 @@ namespace Ex03.ConsoleUI
     {
         // Private Members
         private Garage m_Garage;
-        private const int k_MinMenuOptionValue = 1;
+        private const int k_MinMenuOptionValue = 1; // @ use ValueOutOfRangeException?
         private const int k_MaxMenuOptionValue = 8;
 
         // Public Methods
@@ -54,14 +54,14 @@ namespace Ex03.ConsoleUI
         private void chooseOptionFromMenu()
         {
             int choosenOption = int.Parse(Console.ReadLine());
+            while (choosenOption < k_MinMenuOptionValue || choosenOption > k_MaxMenuOptionValue)
+            {
+                Console.WriteLine(string.Format("Invalid Choice. Enter a value in range {0} to {1}.", k_MinMenuOptionValue, k_MaxMenuOptionValue));
+                choosenOption = int.Parse(Console.ReadLine());
+            }
+
             try
             {
-                while (choosenOption < k_MinMenuOptionValue || choosenOption > k_MaxMenuOptionValue)
-                {
-                    Console.WriteLine(string.Format("Invalid Choice. Enter a value in range {0} to {1}.", k_MinMenuOptionValue, k_MaxMenuOptionValue));
-                    choosenOption = int.Parse(Console.ReadLine());
-                }
-
                 runGarageFunction((eMenuOptions)choosenOption);
             }
             catch (ValueOutOfRangeException voore)      // @ can we combine all of these by catching father class Exception?
@@ -148,11 +148,11 @@ namespace Ex03.ConsoleUI
 
         private void insertVehicleToGarage()
         {
-            string licenseNumber = getLicenseNumberFromUser();// @create this method
+            string licenseNumber = getLicenseNumberFromUser();
             bool isVehicleAlreadyInGarage = m_Garage.GarageVehicles.ContainsKey(licenseNumber);
             if(isVehicleAlreadyInGarage)
             {
-                Console.WriteLine("The vehicle is already in the garage.");
+                Console.WriteLine("The vehicle is already in the garage. It's status was changed to 'In Repair'");
                 m_Garage.UpdateVehicleStatus(licenseNumber, Garage.eVehicleStatus.InRepair);
             }
             else
@@ -163,22 +163,36 @@ namespace Ex03.ConsoleUI
             PrintMenu();
         }
 
+        private string getLicenseNumberFromUser()
+        {
+            Console.WriteLine("Enter License number: ");
+            string licenseNumber = Console.ReadLine();
+            while(!isStringDigitsOnly(licenseNumber))
+            {
+                Console.WriteLine("License number must be digits only, enter license number: ");
+                licenseNumber = Console.ReadLine();
+            }
+
+            return licenseNumber;
+        }
+
         private void createVehicle(string i_LicenseNumber)
         {
-            string ownerName, ownerPhoneNumber;
             string vehicleType = getVehicleTypeFromUser();
-            getOwnerDetailsFromUser(out ownerName, out ownerPhoneNumber);// @create this method
+            getOwnerDetailsFromUser(out string ownerName, out string ownerPhoneNumber);
+            Vehicle newVehicle = VehicleGenerator.CreateVehicle(i_LicenseNumber, vehicleType);
 
         }
 
         private string getVehicleTypeFromUser()
         {
             string chosenType;
-            Console.WriteLine("Choose vehicle type:");
+            Console.WriteLine("Choose vehicle type: ");
             StringBuilder stringOfVehicleTypes = new StringBuilder();
             foreach (object vehicleTypeObject in Enum.GetValues(typeof(VehicleGenerator.eVehicleType)))
             {
-                stringOfVehicleTypes.Append(string.Format(
+                stringOfVehicleTypes.Append(
+                    string.Format(
                     "{0}. {1}{2}",
                     (int)vehicleTypeObject,
                     vehicleTypeObject,
@@ -194,6 +208,41 @@ namespace Ex03.ConsoleUI
             }
 
             return chosenType;
+        }
+
+        private void getOwnerDetailsFromUser(out string io_OwnerNamem, out string io_OwnerPhoneNumber)
+        {
+            string ownerName, phoneNumber;
+            do
+            {
+                Console.WriteLine("Enter vehicle owner name: ");
+                ownerName = Console.ReadLine();
+            }
+            while (string.IsNullOrEmpty(ownerName));
+
+            Console.WriteLine("Enter owner phone number: ");
+            phoneNumber = Console.ReadLine();
+            while(string.IsNullOrEmpty(phoneNumber) || !isStringDigitsOnly(phoneNumber))
+            {
+                Console.WriteLine("Please enter numbers only: ");
+            }
+
+            io_OwnerNamem = ownerName;
+            io_OwnerPhoneNumber = phoneNumber;
+        }
+
+        private bool isStringDigitsOnly(string i_String)
+        {
+            bool isDigitsOnly = true;
+            for (int i = 0; i < i_String.Length; i++)
+            {
+                if(!char.IsDigit(i_String[i]))
+                {
+                    isDigitsOnly = false;
+                }
+            }
+
+            return isDigitsOnly;
         }
 
         private void showLicenseNumbersByFilter()

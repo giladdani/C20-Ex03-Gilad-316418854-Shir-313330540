@@ -15,6 +15,13 @@ namespace Ex03.GarageLogic
         {
         }
 
+        // Public Methods
+        public override string ToString()
+        {
+            return string.Format("{0}Is truck containing hazardous substances: {1}, Cargo size: {2}{3}",
+                base.ToString(), m_IsHazardous.ToString(), m_CargoSize, Environment.NewLine);
+        }
+
         // Properties
         public bool IsHazardous
         {
