@@ -12,16 +12,16 @@ namespace Ex03.GarageLogic
         private Engine m_Engine;
 
         // Constructors
-        protected Vehicle(string i_ModelName, string i_LicenseNumber, eWheelsAmount i_NumberOfWheels, string i_WheelManufacturer, float i_MaxWheelsAirPressure, Engine i_Engine)
+        protected Vehicle( string i_LicenseNumber, eWheelsAmount i_NumberOfWheels, float i_WheelMaxAirPressure, Engine i_Engine)
         {
-            m_ModelName = i_ModelName;
+            //m_ModelName = i_ModelName;
             r_LicenseNumber = i_LicenseNumber;
             m_Engine = i_Engine;
             m_Wheels = new List<Wheel>((int)i_NumberOfWheels);
-            for (int i = 0; i < (int)i_NumberOfWheels; i++)
-            {
-                m_Wheels.Add(new Wheel(i_WheelManufacturer, i_MaxWheelsAirPressure));   // @ really need to supply manufacturer?
-            }
+            //for (int i = 0; i < (int)i_NumberOfWheels; i++)
+            //{
+            //    m_Wheels.Add(new Wheel(i_WheelManufacturer, i_MaxWheelsAirPressure));   // @ really need to supply manufacturer?
+            //}
         }
 
         // Enums
@@ -45,6 +45,9 @@ namespace Ex03.GarageLogic
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
             requests.AddRange(m_Engine.GetEngineDataRequests());
+            requests.AddRange(m_Wheels[0].GetWheelDataRequests());
+            string requestsMessage = string.Format("enter current vehicle model: ");
+            requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.String));
             return requests;
         }
 

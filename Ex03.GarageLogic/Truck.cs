@@ -10,12 +10,24 @@ namespace Ex03.GarageLogic
         private float m_CargoSize;
 
         // Constructors
-        public Truck(string i_ModelName, string i_LicenseNumber, string i_WheelsManufacturer, Engine i_Engine)
-            : base(i_ModelName, i_LicenseNumber, eWheelsAmount.Sixteen, i_WheelsManufacturer, 30, i_Engine)
+        public Truck(string i_LicenseNumber, Engine i_Engine)
+            : base(i_LicenseNumber, eWheelsAmount.Sixteen, 30, i_Engine)
         {
         }
 
         // Public Methods
+        public override List<VehicleDataRequest> GetVehicleDataRequests()
+        {
+            List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
+            requests.AddRange(base.GetVehicleDataRequests());
+            string hazardousMessage = string.Format("Is carrying hazardous equipment(yes/no): ");
+            string cargoSizeMessage = string.Format("Enter cargo size: ");
+            requests.Add(new VehicleDataRequest(hazardousMessage, VehicleDataRequest.eRequestType.Bool));
+            requests.Add(new VehicleDataRequest(cargoSizeMessage, VehicleDataRequest.eRequestType.Number));
+
+            return requests;
+        }
+
         public override string ToString()
         {
             return string.Format("{0}Is truck containing hazardous substances: {1}, Cargo size: {2}{3}",
