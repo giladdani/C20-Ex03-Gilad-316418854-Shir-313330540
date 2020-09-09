@@ -125,6 +125,12 @@ m_OwnerVehicle.ToString());
             }
         }
 
+        public void ChargeElectricVehicleBattery(string i_LicenseNumber, float i_HoursToCharge)
+        {
+            ElectricEngine engine = m_GarageVehicles[i_LicenseNumber].OwnerVehicle.VehicleEngine as ElectricEngine;
+            engine.ChargeBattery(i_HoursToCharge);
+        }
+
         // Properties
         public Dictionary<string, GarageVehicle> GarageVehicles
         {

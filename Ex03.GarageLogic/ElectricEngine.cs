@@ -13,14 +13,7 @@ namespace Ex03.GarageLogic
         // Public Methods
         public void ChargeBattery(float i_HoursToCharge)
         {
-            if(m_CurrentEnergyAmount + i_HoursToCharge <= m_MaxEnergyAmount)
-            {
-                m_CurrentEnergyAmount += i_HoursToCharge;
-            }
-            else
-            {
-                // @ Throw exception
-            }
+            m_CurrentEnergyAmount += i_HoursToCharge;
         }
 
         public override string ToString()
