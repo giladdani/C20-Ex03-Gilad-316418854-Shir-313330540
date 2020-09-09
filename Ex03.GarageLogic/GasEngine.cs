@@ -39,6 +39,12 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override List<VehicleDataRequest> GetEngineDataRequests()
+        {
+            // get gas engine requests
+            List<VehicleDataRequest> requests = new
+        }
+
         public override string ToString()
         {
             return string.Format("{0}, Fuel Type: {1}", base.ToString(), FuelType);

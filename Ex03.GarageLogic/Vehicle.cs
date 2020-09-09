@@ -41,6 +41,18 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public virtual List<VehicleDataRequest> GetVehicleDataRequests()
+        {
+            List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
+            requests.AddRange(m_Engine.GetEngineDataRequests());
+            return requests;
+        }
+
+        public virtual void UpdateVehicleData(List<string> i_DataList)
+        {
+
+        }
+
         public override string ToString()
         {
             return string.Format(

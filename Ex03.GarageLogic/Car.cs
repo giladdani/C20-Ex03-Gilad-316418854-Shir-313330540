@@ -33,6 +33,11 @@ namespace Ex03.GarageLogic
         }
 
         // Public Methods
+        public override List<VehicleDataRequest> GetVehicleDataRequests()
+        {
+
+        }
+
         public override string ToString()
         {
             return string.Format("{0}Color: {1}, Number of doors: {2}{3}", 

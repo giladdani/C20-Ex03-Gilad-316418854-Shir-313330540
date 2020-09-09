@@ -17,6 +17,13 @@ namespace Ex03.GarageLogic
         }
 
         // Public Methods
+        public List<VehicleDataRequest> GetEngineDataRequests()
+        {
+            List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
+            string requestsMessage = string.Format("enter current engine energy (from 0 to {0}: ", m_MaxEnergyAmount);
+            requests.Add(new VehicleDataRequest<float>(requestsMessage));
+        }
+
         public override string ToString()
         {
             return string.Format("Engine: Current energy: {0}, Maximum energy: {1}", m_CurrentEnergyAmount, m_MaxEnergyAmount);
