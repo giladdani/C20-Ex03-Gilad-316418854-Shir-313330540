@@ -10,8 +10,8 @@ namespace Ex03.GarageLogic
         private eDoorsAmount m_DoorsAmount;
 
         // Constructors
-        public Car(string i_ModelName, string i_LicenseNumber, string i_WheelsManufacturer, Engine i_Engine)
-            : base(i_ModelName, i_LicenseNumber, eWheelsAmount.Four, i_WheelsManufacturer, 32, i_Engine)
+        public Car( string i_LicenseNumber, Engine i_Engine)
+            : base(i_LicenseNumber, eWheelsAmount.Four, 32, i_Engine)
         {
         }
 
@@ -35,7 +35,16 @@ namespace Ex03.GarageLogic
         // Public Methods
         public override List<VehicleDataRequest> GetVehicleDataRequests()
         {
+            List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
+            requests.AddRange(base.GetVehicleDataRequests());
+            string[] colorNames = Enum.GetNames(typeof(eColor));
+            string[] doorAmountNames = Enum.GetNames(typeof(eDoorsAmount));
+            string colorMessage = string.Format("Choose color:{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, colorNames[0], colorNames[1], colorNames[2], colorNames[3]);
+            string doorsAmountMessage = string.Format("Choose doors amount:{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, doorAmountNames[0], doorAmountNames[1], doorAmountNames[2], doorAmountNames[3]);
+            requests.Add(new VehicleDataRequest(colorMessage, VehicleDataRequest.eRequestType.Number));
+            requests.Add(new VehicleDataRequest(doorsAmountMessage, VehicleDataRequest.eRequestType.Number));
 
+            return requests;
         }
 
         public override string ToString()

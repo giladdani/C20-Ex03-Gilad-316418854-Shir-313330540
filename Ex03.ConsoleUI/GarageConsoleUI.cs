@@ -357,7 +357,31 @@ namespace Ex03.ConsoleUI
             string vehicleType = getVehicleTypeFromUser();
             getOwnerDetailsFromUser(out string ownerName, out string ownerPhoneNumber);
             Vehicle newVehicle = VehicleGenerator.CreateVehicle(i_LicenseNumber, vehicleType);
-            // @ continue this method
+            List<VehicleDataRequest> requests = newVehicle.GetVehicleDataRequests();
+            List<string> vehicleDataRecieved = new List<string>();
+            foreach(VehicleDataRequest request in requests)
+            {
+                Console.WriteLine(request.Message);
+                vehicleDataRecieved.Add(Console.ReadLine());
+                //switch(request.Type)
+                //{
+                //    case VehicleDataRequest.eRequestType.Number:
+                //        {
+                            
+                //            break;
+                //        }
+                //    case VehicleDataRequest.eRequestType.Bool:
+                //        {
+
+                //            break;
+                //        }
+                //    case VehicleDataRequest.eRequestType.String:
+                //        {
+
+                //            break;
+                //        }
+                //}
+            }
         }
 
         private string getVehicleTypeFromUser()

@@ -46,6 +46,7 @@ namespace Ex03.GarageLogic
             {
                 case eVehicleType.ElectricMotorBike:
                     {
+
                         createdVehicle = createElectricMotorBike(i_LicenseNumber);
                         break;
                     }
@@ -85,27 +86,27 @@ namespace Ex03.GarageLogic
 
         private static Car createGasCar(string i_LicenseNumber)
         {
-            return new Car(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Octan96, 60));            //@ set right parameters
+            return new Car(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Octan96, 50));            //@ set right parameters
         }
 
         private static Car createElectricCar(string i_LicenseNumber)
         {
-            return new Car(i_LicenseNumber, new ElectricEngine(4.8));
+            return new Car(i_LicenseNumber, new ElectricEngine(4.8f));
         }
 
         private static MotorBike createGasMotorBike(string i_LicenseNumber)
         {
-            return new MotorBike(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Octan95, 7));
+            return new MotorBike(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Octan95, 5.5f));
         }
 
         private static MotorBike createElectricMotorBike(string i_LicenseNumber)
         {
-            return new MotorBike(i_LicenseNumber, new ElectricEngine(1.2f));
+            return new MotorBike(i_LicenseNumber, new ElectricEngine(1.6f));
         }
 
         private static Truck createTruck(string i_LicenseNumber)
         {
-            return new Truck(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Soler, 120));
+            return new Truck(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Soler, 105));
         }
     }
 }

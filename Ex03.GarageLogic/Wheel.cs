@@ -18,6 +18,14 @@ namespace Ex03.GarageLogic
         }
 
         // Public Methods
+        public List<VehicleDataRequest> GetWheelDataRequests()
+        {
+            List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
+            string requestsMessage = string.Format("enter current air pressure (from 0 to {0}: ", m_MaxAirPressure);
+            requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.Number));
+            return requests;
+        }
+
         public bool AddAir(float i_AirToAdd)
         {
             bool isSucceed;

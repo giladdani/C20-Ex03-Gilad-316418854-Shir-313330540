@@ -4,14 +4,14 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace Ex03.GarageLogic
 {
-    public class VehicleDataRequest<T>
+    public class VehicleDataRequest
     {
         // Private Members
         private string m_Message;
-        private T m_Type;
+        private eRequestType m_Type;
 
         // Constructors
-        public VehicleDataRequest(string i_Message, T i_Type)
+        public VehicleDataRequest(string i_Message, eRequestType i_Type)
         {
             m_Message = i_Message;
             m_Type = i_Type;
@@ -21,7 +21,8 @@ namespace Ex03.GarageLogic
         public enum eRequestType
         {
             Bool = 1,
-            Number = 2
+            String = 2,
+            Number = 3
         }
 
         // Properties
