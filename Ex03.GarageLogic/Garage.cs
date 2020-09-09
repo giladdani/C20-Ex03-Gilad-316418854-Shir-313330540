@@ -60,13 +60,12 @@ namespace Ex03.GarageLogic
             public override string ToString()
             {
                 return string.Format(
-@"Owner name: {0}, Phone Number: {1}, Vehicle status: {2}.
-Vehicle information: {3}{4}",
-m_OwnerName,
-m_OwnerPhoneNumber,
-m_VehicleStatus.ToString(),
-Environment.NewLine,
-m_OwnerVehicle.ToString());
+                "Owner name: {0}, Owner phone number: {1}, Vehicle status: {2}.{3}{4}",
+                m_OwnerName,
+                m_OwnerPhoneNumber,
+                m_VehicleStatus.ToString(),
+                Environment.NewLine,
+                m_OwnerVehicle.ToString());
             }
         }
 

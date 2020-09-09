@@ -274,7 +274,16 @@ namespace Ex03.ConsoleUI
 
         private void showAllVehicleDetails()
         {
-            // @todo
+            string licenseNumber = getNumberStringFromUser();
+            if(m_Garage.IsVehicleInGarage(licenseNumber))
+            {
+                Console.WriteLine(m_Garage.GarageVehicles[licenseNumber].ToString());
+                
+            }
+            else
+            {
+                Console.WriteLine("Vehicle was not found in garage.");
+            }
         }
 
         private string getNumberStringFromUser()
