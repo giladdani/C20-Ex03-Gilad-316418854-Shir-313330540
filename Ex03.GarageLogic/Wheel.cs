@@ -11,9 +11,8 @@ namespace Ex03.GarageLogic
         private float m_MaxAirPressure;
 
         // Constructor
-        public Wheel(string i_Manufacturer, float i_MaxAirPressure)
+        public Wheel(float i_MaxAirPressure)
         {
-            m_Manufacturer = i_Manufacturer;
             m_MaxAirPressure = i_MaxAirPressure;
         }
 
@@ -24,6 +23,11 @@ namespace Ex03.GarageLogic
             string requestsMessage = string.Format("enter current air pressure (from 0 to {0}: ", m_MaxAirPressure);
             requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.Number));
             return requests;
+        }
+
+        public void UpdateWheelsData(/*@wheel manufacturer, current air pressure*/)
+        {
+            // @update wheel manufacturer and current air pressure
         }
 
         public bool AddAir(float i_AirToAdd)

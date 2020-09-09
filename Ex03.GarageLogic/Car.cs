@@ -41,8 +41,8 @@ namespace Ex03.GarageLogic
             string[] doorAmountNames = Enum.GetNames(typeof(eDoorsAmount));
             string colorMessage = string.Format("Choose color:{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, colorNames[0], colorNames[1], colorNames[2], colorNames[3]);
             string doorsAmountMessage = string.Format("Choose doors amount:{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, doorAmountNames[0], doorAmountNames[1], doorAmountNames[2], doorAmountNames[3]);
-            requests.Add(new VehicleDataRequest(colorMessage, VehicleDataRequest.eRequestType.Number));
-            requests.Add(new VehicleDataRequest(doorsAmountMessage, VehicleDataRequest.eRequestType.Number));
+            requests.Add(new VehicleDataRequest(colorMessage, VehicleDataRequest.eRequestType.NumericRange, 1, 4));
+            requests.Add(new VehicleDataRequest(doorsAmountMessage, VehicleDataRequest.eRequestType.NumericRange, 1, 4));
 
             return requests;
         }

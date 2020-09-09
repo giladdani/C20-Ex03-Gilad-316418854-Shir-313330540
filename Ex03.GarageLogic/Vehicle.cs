@@ -12,9 +12,8 @@ namespace Ex03.GarageLogic
         private Engine m_Engine;
 
         // Constructors
-        protected Vehicle( string i_LicenseNumber, eWheelsAmount i_NumberOfWheels, float i_WheelMaxAirPressure, Engine i_Engine)
+        protected Vehicle(string i_LicenseNumber, eWheelsAmount i_NumberOfWheels, float i_WheelMaxAirPressure, Engine i_Engine)
         {
-            //m_ModelName = i_ModelName;
             r_LicenseNumber = i_LicenseNumber;
             m_Engine = i_Engine;
             m_Wheels = new List<Wheel>((int)i_NumberOfWheels);
@@ -44,16 +43,17 @@ namespace Ex03.GarageLogic
         public virtual List<VehicleDataRequest> GetVehicleDataRequests()
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
+            string requestsMessage = string.Format("enter current vehicle model: ");
             requests.AddRange(m_Engine.GetEngineDataRequests());
             requests.AddRange(m_Wheels[0].GetWheelDataRequests());
-            string requestsMessage = string.Format("enter current vehicle model: ");
             requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.String));
+
             return requests;
         }
 
         public virtual void UpdateVehicleData(List<string> i_DataList)
         {
-
+            // @
         }
 
         public override string ToString()

@@ -362,26 +362,23 @@ namespace Ex03.ConsoleUI
             foreach(VehicleDataRequest request in requests)
             {
                 Console.WriteLine(request.Message);
-                vehicleDataRecieved.Add(Console.ReadLine());
-                //switch(request.Type)
-                //{
-                //    case VehicleDataRequest.eRequestType.Number:
-                //        {
-                            
-                //            break;
-                //        }
-                //    case VehicleDataRequest.eRequestType.Bool:
-                //        {
-
-                //            break;
-                //        }
-                //    case VehicleDataRequest.eRequestType.String:
-                //        {
-
-                //            break;
-                //        }
-                //}
+                vehicleDataRecieved.Add(getRequestDataFromUser(request));
             }
+        }
+
+        private string getRequestDataFromUser(VehicleDataRequest i_Request)
+        {
+            bool isDataTypeValid;
+            string userInput;
+
+            do
+            {
+                userInput = Console.ReadLine();
+                isDataTypeValid = i_Request.IsGivenDataValid(userInput);
+            }
+            while (isDataTypeValid != true);
+
+            return userInput;
         }
 
         private string getVehicleTypeFromUser()

@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
             requests.AddRange(base.GetVehicleDataRequests());
             string hazardousMessage = string.Format("Is carrying hazardous equipment(yes/no): ");
             string cargoSizeMessage = string.Format("Enter cargo size: ");
-            requests.Add(new VehicleDataRequest(hazardousMessage, VehicleDataRequest.eRequestType.Bool));
+            requests.Add(new VehicleDataRequest(hazardousMessage, VehicleDataRequest.eRequestType.YesOrNo));
             requests.Add(new VehicleDataRequest(cargoSizeMessage, VehicleDataRequest.eRequestType.Number));
 
             return requests;

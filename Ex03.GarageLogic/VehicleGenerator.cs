@@ -86,7 +86,7 @@ namespace Ex03.GarageLogic
 
         private static Car createGasCar(string i_LicenseNumber)
         {
-            return new Car(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Octan96, 50));            //@ set right parameters
+            return new Car(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Octan96, 50));
         }
 
         private static Car createElectricCar(string i_LicenseNumber)
