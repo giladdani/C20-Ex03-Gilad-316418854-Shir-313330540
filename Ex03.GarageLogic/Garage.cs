@@ -10,6 +10,12 @@ namespace Ex03.GarageLogic
         private const int k_MinVehicleStatusValue = 1;
         private const int k_MaxVehicleStatusValue = 3;
 
+        // Constructors
+        public Garage()
+        {
+            m_GarageVehicles = new Dictionary<string, GarageVehicle>();
+        }
+
         // Enums
         public enum eVehicleStatus
         {
@@ -89,7 +95,7 @@ namespace Ex03.GarageLogic
         public List<string> GetLicenseNumberListByStatus(int i_StatusFilter)
         {
             List<string> licenseList = new List<string>();
-            if(i_StatusFilter == 0)
+            if(i_StatusFilter == 4)
             {
                 foreach (GarageVehicle garageVehicle in m_GarageVehicles.Values)
                 {

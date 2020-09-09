@@ -37,6 +37,12 @@ namespace Ex03.GarageLogic
 
             return requests;
         }
+        public override void UpdateVehicleData(List<string> i_DataList)
+        {
+            base.UpdateVehicleData(i_DataList);
+            m_LicenseType = (eLicenseType)int.Parse(i_DataList[4]);
+            m_EngineCapacity = int.Parse(i_DataList[5]);
+        }
 
         public override string ToString()
         {

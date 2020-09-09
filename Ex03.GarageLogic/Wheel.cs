@@ -17,17 +17,15 @@ namespace Ex03.GarageLogic
         }
 
         // Public Methods
-        public List<VehicleDataRequest> GetWheelDataRequests()
+        public static List<VehicleDataRequest> GetWheelDataRequests()
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
-            string requestsMessage = string.Format("enter current air pressure (from 0 to {0}: ", m_MaxAirPressure);
-            requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.Number));
-            return requests;
-        }
+            string manufacturerMessage = string.Format("enter wheel manufacturer: ");
+            string maxAirPressureMessage = string.Format("enter current air pressure (from 0 to {0}): ", 3); // @find solution for this
+            requests.Add(new VehicleDataRequest(manufacturerMessage, VehicleDataRequest.eRequestType.String));
+            requests.Add(new VehicleDataRequest(maxAirPressureMessage, VehicleDataRequest.eRequestType.NumericRange));
 
-        public void UpdateWheelsData(/*@wheel manufacturer, current air pressure*/)
-        {
-            // @update wheel manufacturer and current air pressure
+            return requests;
         }
 
         public bool AddAir(float i_AirToAdd)

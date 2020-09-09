@@ -364,6 +364,9 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(request.Message);
                 vehicleDataRecieved.Add(getRequestDataFromUser(request));
             }
+
+            newVehicle.UpdateVehicleData(vehicleDataRecieved);
+            m_Garage.InsertNewVehicle(ownerName, ownerPhoneNumber, newVehicle);
         }
 
         private string getRequestDataFromUser(VehicleDataRequest i_Request)
@@ -421,6 +424,7 @@ namespace Ex03.ConsoleUI
             while(string.IsNullOrEmpty(phoneNumber) || !isStringDigitsOnly(phoneNumber))
             {
                 Console.WriteLine("Please enter numbers only: ");
+                phoneNumber = Console.ReadLine();
             }
 
             io_OwnerName = ownerName;

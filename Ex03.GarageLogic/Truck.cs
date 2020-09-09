@@ -27,6 +27,12 @@ namespace Ex03.GarageLogic
 
             return requests;
         }
+        public override void UpdateVehicleData(List<string> i_DataList)
+        {
+            base.UpdateVehicleData(i_DataList);
+            m_IsHazardous = i_DataList[4] == "yes" ? true : false;
+            m_CargoSize = float.Parse(i_DataList[5]);
+        }
 
         public override string ToString()
         {

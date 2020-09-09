@@ -17,10 +17,10 @@ namespace Ex03.GarageLogic
             r_LicenseNumber = i_LicenseNumber;
             m_Engine = i_Engine;
             m_Wheels = new List<Wheel>((int)i_NumberOfWheels);
-            //for (int i = 0; i < (int)i_NumberOfWheels; i++)
-            //{
-            //    m_Wheels.Add(new Wheel(i_WheelManufacturer, i_MaxWheelsAirPressure));   // @ really need to supply manufacturer?
-            //}
+            for (int i = 0; i < (int)i_NumberOfWheels; i++)
+            {
+                m_Wheels.Add(new Wheel(i_WheelMaxAirPressure));
+            }
         }
 
         // Enums
@@ -43,17 +43,35 @@ namespace Ex03.GarageLogic
         public virtual List<VehicleDataRequest> GetVehicleDataRequests()
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
-            string requestsMessage = string.Format("enter current vehicle model: ");
+            string modelNameMessage = string.Format("enter vehicle model: ");
+            requests.Add(new VehicleDataRequest(modelNameMessage, VehicleDataRequest.eRequestType.String));
             requests.AddRange(m_Engine.GetEngineDataRequests());
-            requests.AddRange(m_Wheels[0].GetWheelDataRequests());
-            requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.String));
+            requests.AddRange(Wheel.GetWheelDataRequests());
 
             return requests;
         }
 
         public virtual void UpdateVehicleData(List<string> i_DataList)
         {
-            // @
+            float currentEnergyAmount, currentAirPressure;
+            m_ModelName = i_DataList[0];
+            if(!float.TryParse(i_DataList[1], out currentEnergyAmount))
+            {
+                currentEnergyAmount = (float)int.Parse(i_DataList[1]);
+            }
+
+            m_Engine.CurrentEnergyAmount = currentEnergyAmount;
+
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheel.Manufacturer = i_DataList[2];
+                if (!float.TryParse(i_DataList[3], out currentAirPressure))
+                {
+                    currentAirPressure = (float)int.Parse(i_DataList[3]);
+                }
+
+                wheel.CurrentAirPressure = currentAirPressure;
+            }
         }
 
         public override string ToString()

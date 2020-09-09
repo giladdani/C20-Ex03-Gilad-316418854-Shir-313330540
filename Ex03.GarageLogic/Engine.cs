@@ -20,8 +20,9 @@ namespace Ex03.GarageLogic
         public List<VehicleDataRequest> GetEngineDataRequests()
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
-            string requestsMessage = string.Format("enter current engine energy (from 0 to {0}: ", m_MaxEnergyAmount);
+            string requestsMessage = string.Format("enter current engine energy (from 0 to {0}): ", m_MaxEnergyAmount);
             requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.NumericRange, 0, m_MaxEnergyAmount));
+
             return requests;
         }
 
@@ -36,9 +37,9 @@ namespace Ex03.GarageLogic
             get => m_CurrentEnergyAmount;
             set
             {
-                if(m_CurrentEnergyAmount + value > m_MaxEnergyAmount)
+                if(value > m_MaxEnergyAmount)
                 {
-                    throw new ValueOutOfRangeException(0, m_MaxEnergyAmount - m_CurrentEnergyAmount, value);
+                    throw new ValueOutOfRangeException(0, m_MaxEnergyAmount, value);
                 }
             }
         }

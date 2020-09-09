@@ -20,6 +20,14 @@ namespace Ex03.GarageLogic
             m_Type = i_Type;
         }
 
+        public VehicleDataRequest(string i_Message, eRequestType i_Type, float i_MinValue, float i_MaxValue)
+        {
+            m_Message = i_Message;
+            m_Type = i_Type;
+            m_MinValue = i_MinValue;
+            m_MaxValue = i_MaxValue;
+        }
+
         // Enums
         public enum eRequestType
         {
@@ -27,14 +35,6 @@ namespace Ex03.GarageLogic
             String = 2,
             Number = 3,
             NumericRange = 4
-        }
-
-        public VehicleDataRequest(string i_Message, eRequestType i_Type, float i_MinValue, float i_MaxValue)
-        {
-            m_Message = i_Message;
-            m_Type = i_Type;
-            m_MinValue = i_MinValue;
-            m_MaxValue = i_MaxValue;
         }
 
         // Public Methods
@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
                     }
                 case eRequestType.NumericRange:
                     {
-                        isValid = isANumberInRange(i_GivenData);
+                        isValid = isNumber(i_GivenData) && isNumberInRange(i_GivenData);
                         break;
                     }
                 default:
@@ -90,7 +90,19 @@ namespace Ex03.GarageLogic
 
         private bool isNumber(string i_String)
         {
+            return int.TryParse(i_String, out _);
+        }
 
+        private bool isNumberInRange(string i_String)
+        {
+            bool isValid = true;
+            int stringAsNumber = int.Parse(i_String);
+            if(stringAsNumber > m_MaxValue || stringAsNumber < m_MinValue)
+            {
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         // Properties

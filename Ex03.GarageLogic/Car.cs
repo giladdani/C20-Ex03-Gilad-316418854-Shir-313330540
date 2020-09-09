@@ -47,6 +47,13 @@ namespace Ex03.GarageLogic
             return requests;
         }
 
+        public override void UpdateVehicleData(List<string> i_DataList)
+        {
+            base.UpdateVehicleData(i_DataList);
+            m_Color = (eColor)int.Parse(i_DataList[4]);
+            m_DoorsAmount = (eDoorsAmount)int.Parse(i_DataList[5]);
+        }
+
         public override string ToString()
         {
             return string.Format("{0}Color: {1}, Number of doors: {2}{3}", 
