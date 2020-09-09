@@ -35,7 +35,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Wrong fuel type");
+                throw new ArgumentException("Cannot fill wrong fuel type");
             }
         }
 
