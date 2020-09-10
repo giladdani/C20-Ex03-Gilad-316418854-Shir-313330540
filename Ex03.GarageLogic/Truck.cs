@@ -37,10 +37,11 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
+            string hazardousYesOrNo = m_IsHazardous == true ? "Yes" : "No";
             return string.Format(
                 "{0}Is truck containing hazardous substances: {1}, Cargo size: {2}{3}",
                 base.ToString(),
-                m_IsHazardous.ToString(),
+                hazardousYesOrNo,
                 m_CargoSize,
                 Environment.NewLine);
         }

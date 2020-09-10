@@ -27,5 +27,10 @@ namespace Ex03.GarageLogic
                 throw new Exception(batteryOverflowMessage);
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format("Battery hours left: {0}, Maximum battery hours: {1}", m_CurrentEnergyAmount, m_MaxEnergyAmount);
+        }
     }
 }
