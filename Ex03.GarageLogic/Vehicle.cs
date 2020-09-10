@@ -43,41 +43,29 @@ namespace Ex03.GarageLogic
         public virtual List<VehicleDataRequest> GetVehicleDataRequests()
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
-            string modelNameMessage = string.Format("enter vehicle model: ");
+            string modelNameMessage = string.Format("Enter vehicle model:");
             requests.Add(new VehicleDataRequest(modelNameMessage, VehicleDataRequest.eRequestType.String));
             requests.AddRange(m_Engine.GetEngineDataRequests());
-            requests.AddRange(Wheel.GetWheelDataRequests());
+            requests.AddRange(m_Wheels[0].GetWheelDataRequests());
 
             return requests;
         }
 
         public virtual void UpdateVehicleData(List<string> i_DataList)
         {
-            float currentEnergyAmount, currentAirPressure;
             m_ModelName = i_DataList[0];
-            if(!float.TryParse(i_DataList[1], out currentEnergyAmount))
-            {
-                currentEnergyAmount = (float)int.Parse(i_DataList[1]);
-            }
-
-            m_Engine.CurrentEnergyAmount = currentEnergyAmount;
-
+            m_Engine.CurrentEnergyAmount = float.Parse(i_DataList[1]);
             foreach (Wheel wheel in m_Wheels)
             {
                 wheel.Manufacturer = i_DataList[2];
-                if (!float.TryParse(i_DataList[3], out currentAirPressure))
-                {
-                    currentAirPressure = (float)int.Parse(i_DataList[3]);
-                }
-
-                wheel.CurrentAirPressure = currentAirPressure;
+                wheel.CurrentAirPressure = float.Parse(i_DataList[3]);
             }
         }
 
         public override string ToString()
         {
             return string.Format(
-                "License number: {0}, Model: {1}, Energy Percentage: {2}%{3}Wheels: {4}{5}Engine: {6}{7}",
+                "Vehicle License number: {0}, Model: {1}, Energy Percentage: {2}%{3}Wheels: {4}{5}Engine: {6}{7}",
                 r_LicenseNumber,
                 m_ModelName,
                 EnergyPercentageLeft,
@@ -91,23 +79,39 @@ namespace Ex03.GarageLogic
         // Properties
         public string ModelName
         {
-            get => m_ModelName;
-            set => m_ModelName = value;
+            get
+            {
+                return m_ModelName;
+            }
+
+            set
+            {
+                m_ModelName = value;
+            }
         }
 
         public string LicenseNumber
         {
-            get => r_LicenseNumber;
+            get
+            {
+                return r_LicenseNumber;
+            }
         }
 
         public float EnergyPercentageLeft
         {
-            get => (m_Engine.MaxEnergyAmount / m_Engine.CurrentEnergyAmount);
+            get
+            {
+                return m_Engine.CurrentEnergyAmount / m_Engine.MaxEnergyAmount;
+            }
         }
 
         public Engine VehicleEngine
         {
-            get => m_Engine;
+            get
+            {
+                return m_Engine;
+            }
         }
     }
 }

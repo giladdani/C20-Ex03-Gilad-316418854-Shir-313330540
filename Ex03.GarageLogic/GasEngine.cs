@@ -39,31 +39,10 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override string ToString()
-        {
-            return string.Format("{0}, Fuel Type: {1}", base.ToString(), FuelType);
-        }
-
-        // Properties
-        public eFuelType FuelType
-        {
-            get => m_FuelType;
-            set
-            {
-                if(IsFuelTypeInRange((int)value))
-                {
-                    m_FuelType = value;
-                }
-                else
-                {
-                    throw new ValueOutOfRangeException(k_MinFuelTypeValue, k_MaxFuelTypeValue, (int)value); // @ wait for Guy's answer
-                }
-            } 
-        }
-
         public static bool IsFuelTypeInRange(int fuelType)
         {
             bool isTypeInRange;
+
             if (fuelType > k_MaxFuelTypeValue || fuelType < k_MinFuelTypeValue)
             {
                 isTypeInRange = false;
@@ -74,6 +53,32 @@ namespace Ex03.GarageLogic
             }
 
             return isTypeInRange;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, Fuel Type: {1}", base.ToString(), FuelType);
+        }
+
+        // Properties
+        public eFuelType FuelType
+        {
+            get
+            {
+                return m_FuelType;
+            }
+
+            set
+            {
+                if(IsFuelTypeInRange((int)value))
+                {
+                    m_FuelType = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(k_MinFuelTypeValue, k_MaxFuelTypeValue, (int)value);
+                }
+            }
         }
     }
 }

@@ -20,34 +20,50 @@ namespace Ex03.GarageLogic
         public List<VehicleDataRequest> GetEngineDataRequests()
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
-            string requestsMessage = string.Format("enter current engine energy (from 0 to {0}): ", m_MaxEnergyAmount);
-            requests.Add(new VehicleDataRequest(requestsMessage, VehicleDataRequest.eRequestType.NumericRange, 0, m_MaxEnergyAmount));
+            string currentEnergyMessage = string.Format("Enter current engine energy (from 0 to {0}): ", m_MaxEnergyAmount);
+            requests.Add(new VehicleDataRequest(currentEnergyMessage, VehicleDataRequest.eRequestType.NumericRange, 0, m_MaxEnergyAmount));
 
             return requests;
         }
 
         public override string ToString()
         {
-            return string.Format("Engine: Current energy: {0}, Maximum energy: {1}", m_CurrentEnergyAmount, m_MaxEnergyAmount);
+            return string.Format("Current energy: {0}, Maximum energy: {1}", m_CurrentEnergyAmount, m_MaxEnergyAmount);
         }
 
         // Properties
         public float CurrentEnergyAmount
         {
-            get => m_CurrentEnergyAmount;
+            get
+            {
+                return m_CurrentEnergyAmount;
+            }
+
             set
             {
-                if(value > m_MaxEnergyAmount)
+                if(value <= m_MaxEnergyAmount)
+                {
+                    m_CurrentEnergyAmount = value;
+                }
+                else
                 {
                     throw new ValueOutOfRangeException(0, m_MaxEnergyAmount, value);
                 }
+
             }
         }
 
         public float MaxEnergyAmount
         {
-            get => m_MaxEnergyAmount;
-            set => m_MaxEnergyAmount = value;
+            get
+            {
+                return m_MaxEnergyAmount;
+            }
+
+            set
+            {
+                m_MaxEnergyAmount = value;       // @ validations and exception?
+            }
         }
     }
 }

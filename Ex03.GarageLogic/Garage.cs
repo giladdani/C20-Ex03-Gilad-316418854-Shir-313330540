@@ -24,6 +24,7 @@ namespace Ex03.GarageLogic
             Paid = 3
         }
 
+        // Inner class
         public class GarageVehicle
         {
             private string m_OwnerName;
@@ -41,26 +42,54 @@ namespace Ex03.GarageLogic
 
             public string OwnerName
             {
-                get => m_OwnerName;
-                set => m_OwnerName = value;
+                get
+                {
+                    return m_OwnerName;
+                }
+
+                set
+                {
+                    m_OwnerName = value;
+                }
             }
 
             public string OwnerPhoneNumber
             {
-                get => m_OwnerPhoneNumber;
-                set => m_OwnerPhoneNumber = value;
+                get
+                {
+                    return m_OwnerPhoneNumber;
+                }
+
+                set
+                {
+                    m_OwnerPhoneNumber = value;
+                }
             }
 
             public eVehicleStatus VehicleStatus
             {
-                get => m_VehicleStatus;
-                set => m_VehicleStatus = value;
+                get
+                {
+                    return m_VehicleStatus;
+                }
+
+                set
+                {
+                    m_VehicleStatus = value;
+                }
             }
 
             public Vehicle OwnerVehicle
             {
-                get => m_OwnerVehicle;
-                set => m_OwnerVehicle = value;
+                get
+                {
+                    return m_OwnerVehicle;
+                }
+
+                set
+                {
+                    m_OwnerVehicle = value;
+                }
             }
 
             public override string ToString()
@@ -139,18 +168,31 @@ namespace Ex03.GarageLogic
         // Properties
         public Dictionary<string, GarageVehicle> GarageVehicles
         {
-            get => m_GarageVehicles;
-            set => m_GarageVehicles = value;
+            get
+            {
+                return m_GarageVehicles;
+            }
+
+            set
+            {
+                m_GarageVehicles = value;
+            }
         }
 
         public int MinVehicleStatusValue
         {
-            get => k_MinVehicleStatusValue;
+            get
+            {
+                return k_MinVehicleStatusValue;
+            }
         }
 
         public int MaxVehicleStatusValue
         {
-            get => k_MaxVehicleStatusValue;
+            get
+            {
+                return k_MaxVehicleStatusValue;
+            }
         }
     }
 }

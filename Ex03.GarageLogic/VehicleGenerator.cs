@@ -24,6 +24,7 @@ namespace Ex03.GarageLogic
         {
             bool isTypeInRange;
             int typeAsNumber = int.Parse(i_NumberInRange);
+
             if (typeAsNumber > k_MaxVehicleTypeValue || typeAsNumber < k_MinVehicleTypeValue)
             {
                 isTypeInRange = false;
@@ -84,6 +85,7 @@ namespace Ex03.GarageLogic
             return createdVehicle;
         }
 
+        // Private Methods
         private static Car createGasCar(string i_LicenseNumber)
         {
             return new Car(i_LicenseNumber, new GasEngine(GasEngine.eFuelType.Octan96, 50));

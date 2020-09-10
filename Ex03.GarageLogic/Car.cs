@@ -26,10 +26,10 @@ namespace Ex03.GarageLogic
 
         public enum eDoorsAmount
         {
-            Two = 2,
-            Three = 3,
-            Four = 4,
-            Five = 5
+            Two = 1,
+            Three = 2,
+            Four = 3,
+            Five = 4
         }
 
         // Public Methods
@@ -39,8 +39,8 @@ namespace Ex03.GarageLogic
             requests.AddRange(base.GetVehicleDataRequests());
             string[] colorNames = Enum.GetNames(typeof(eColor));
             string[] doorAmountNames = Enum.GetNames(typeof(eDoorsAmount));
-            string colorMessage = string.Format("Choose color:{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, colorNames[0], colorNames[1], colorNames[2], colorNames[3]);
-            string doorsAmountMessage = string.Format("Choose doors amount:{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, doorAmountNames[0], doorAmountNames[1], doorAmountNames[2], doorAmountNames[3]);
+            string colorMessage = string.Format("Choose color (by number):{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, colorNames[0], colorNames[1], colorNames[2], colorNames[3]);
+            string doorsAmountMessage = string.Format("Choose doors amount (by number):{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, doorAmountNames[0], doorAmountNames[1], doorAmountNames[2], doorAmountNames[3]);
             requests.Add(new VehicleDataRequest(colorMessage, VehicleDataRequest.eRequestType.NumericRange, 1, 4));
             requests.Add(new VehicleDataRequest(doorsAmountMessage, VehicleDataRequest.eRequestType.NumericRange, 1, 4));
 
@@ -63,14 +63,28 @@ namespace Ex03.GarageLogic
         // Properties
         public eColor Color
         {
-            get => m_Color;
-            set => m_Color = value;     // @ Add validations and exceptions
+            get
+            {
+                return m_Color;
+            }
+
+            set
+            {
+                m_Color = value; // @ Add validations and exceptions
+            }
         }
 
         public eDoorsAmount DoorsAmount
         {
-            get => m_DoorsAmount;
-            set => m_DoorsAmount = value;       // @ Add validations and exceptions
+            get
+            {
+                return m_DoorsAmount;
+            }
+
+            set
+            {
+                m_DoorsAmount = value;       // @ Add validations and exceptions
+            }
         }
     }
 }

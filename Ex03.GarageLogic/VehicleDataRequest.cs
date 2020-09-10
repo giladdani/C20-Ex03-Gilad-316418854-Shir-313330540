@@ -41,26 +41,27 @@ namespace Ex03.GarageLogic
         public bool IsGivenDataValid(string i_GivenData)
         {
             bool isValid;
+
             switch(m_Type)
             {
                 case eRequestType.YesOrNo:
                     {
-                        isValid = isYesOrNo(i_GivenData);
+                        isValid = StringValidator.isStringYesOrNo(i_GivenData);
                         break;
                     }
                 case eRequestType.String:
                     {
-                        isValid = isValidString(i_GivenData);
+                        isValid = !string.IsNullOrEmpty(i_GivenData);
                         break;
                     }
                 case eRequestType.Number:
                     {
-                        isValid = isNumber(i_GivenData);
+                        isValid = StringValidator.isStringANumber(i_GivenData);
                         break;
                     }
                 case eRequestType.NumericRange:
                     {
-                        isValid = isNumber(i_GivenData) && isNumberInRange(i_GivenData);
+                        isValid = StringValidator.isStringANumber(i_GivenData) && StringValidator.isStringNumberInRange(i_GivenData, m_MinValue, m_MaxValue);
                         break;
                     }
                 default:
@@ -73,49 +74,31 @@ namespace Ex03.GarageLogic
             return isValid;
         }
 
-        // Private Methods
-        private bool isYesOrNo(string i_String)
-        {
-            string stringInLowercase = i_String.ToLower();
-
-            return stringInLowercase == "yes" || stringInLowercase == "no";
-        }
-
-        private bool isValidString(string i_String)
-        {
-            bool isValid = !string.IsNullOrEmpty(i_String);
-
-            return isValid;
-        }
-
-        private bool isNumber(string i_String)
-        {
-            return int.TryParse(i_String, out _);
-        }
-
-        private bool isNumberInRange(string i_String)
-        {
-            bool isValid = true;
-            int stringAsNumber = int.Parse(i_String);
-            if(stringAsNumber > m_MaxValue || stringAsNumber < m_MinValue)
-            {
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
         // Properties
         public string Message
         {
-            get => m_Message;
-            set => m_Message = value;
+            get
+            {
+                return m_Message;
+            }
+
+            set
+            {
+                m_Message = value;
+            }
         }
 
         public eRequestType Type
         {
-            get => m_Type;
-            set => m_Type = value;
+            get
+            {
+                return m_Type;
+            }
+
+            set
+            {
+                m_Type = value;
+            }
         }
 
         public float MinValue
@@ -132,7 +115,10 @@ namespace Ex03.GarageLogic
                 }
             }
 
-            set => m_MinValue = value;
+            set
+            {
+                m_MinValue = value;
+            }
         }
 
         public float MaxValue
@@ -149,7 +135,10 @@ namespace Ex03.GarageLogic
                 }
             }
 
-            set => m_MaxValue = value;
+            set
+            {
+                m_MaxValue = value;
+            }
         }
     }
 }

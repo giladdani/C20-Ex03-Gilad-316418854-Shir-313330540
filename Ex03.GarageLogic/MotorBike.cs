@@ -30,13 +30,14 @@ namespace Ex03.GarageLogic
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
             requests.AddRange(base.GetVehicleDataRequests());
             string[] licenseNames = Enum.GetNames(typeof(eLicenseType));
-            string licenseTypeMessage = string.Format("Choose license type:{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, licenseNames[0], licenseNames[1], licenseNames[2], licenseNames[3]);
-            string engineCapacityMessage = string.Format("Enter engine capacity: ");
+            string licenseTypeMessage = string.Format("Choose motorbike license type (by number):{0}1.{1}{0}2.{2}{0}3.{3}{0}4.{4}{0}", Environment.NewLine, licenseNames[0], licenseNames[1], licenseNames[2], licenseNames[3]);
+            string engineCapacityMessage = string.Format("Enter engine capacity:");
             requests.Add(new VehicleDataRequest(licenseTypeMessage, VehicleDataRequest.eRequestType.NumericRange, 1, 4));
             requests.Add(new VehicleDataRequest(engineCapacityMessage, VehicleDataRequest.eRequestType.Number));
 
             return requests;
         }
+
         public override void UpdateVehicleData(List<string> i_DataList)
         {
             base.UpdateVehicleData(i_DataList);
@@ -46,23 +47,35 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}License Type: {1}, Engine Capacity: {2}{3}",
+            return string.Format("{0}MotorBike License Type: {1}, Engine Capacity: {2}{3}",
                 base.ToString(), m_LicenseType, m_EngineCapacity, Environment.NewLine);
         }
 
         // Properties
         public eLicenseType LicenseType
         {
-            get => m_LicenseType;
-            set => m_LicenseType = value;       // @ Add validations and exceptions
+            get
+            {
+                return m_LicenseType;
+            }
+
+            set
+            {
+                m_LicenseType = value;  // @ Add validations and exceptions
+            }
         }
 
         public int EngineCapacity
         {
-            get => m_EngineCapacity;
-            set => m_EngineCapacity = value;        // @ Add validations and exceptions
+            get
+            {
+                return m_EngineCapacity;
+            }
+
+            set
+            {
+                m_EngineCapacity = value;   // @ Add validations and exceptions
+            }
         }
-
-
     }
 }

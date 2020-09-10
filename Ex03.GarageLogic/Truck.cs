@@ -20,8 +20,8 @@ namespace Ex03.GarageLogic
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
             requests.AddRange(base.GetVehicleDataRequests());
-            string hazardousMessage = string.Format("Is carrying hazardous equipment(yes/no): ");
-            string cargoSizeMessage = string.Format("Enter cargo size: ");
+            string hazardousMessage = string.Format("Is carrying hazardous equipment? (enter yes/no):");
+            string cargoSizeMessage = string.Format("Enter cargo size:");
             requests.Add(new VehicleDataRequest(hazardousMessage, VehicleDataRequest.eRequestType.YesOrNo));
             requests.Add(new VehicleDataRequest(cargoSizeMessage, VehicleDataRequest.eRequestType.Number));
 
@@ -43,14 +43,28 @@ namespace Ex03.GarageLogic
         // Properties
         public bool IsHazardous
         {
-            get => m_IsHazardous;
-            set => m_IsHazardous = value;   // @ Add validations and exceptions
+            get
+            {
+                return m_IsHazardous;
+            }
+
+            set
+            {
+                m_IsHazardous = value;            // @ Add validations and exceptions
+            }
         }
 
         public float CargoSize
         {
-            get => m_CargoSize;
-            set => m_CargoSize = value;     // @ Add validations and exceptions
+            get
+            {
+                return m_CargoSize;
+            }
+
+            set
+            {
+                m_CargoSize = value;    // @ Add validations and exceptions
+            }
         }
     }
 }

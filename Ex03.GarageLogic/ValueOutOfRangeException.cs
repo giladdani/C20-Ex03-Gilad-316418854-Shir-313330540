@@ -21,14 +21,28 @@ namespace Ex03.GarageLogic
         // Properties
         public float MinValue
         {
-            get => m_MinValue;
-            set => m_MinValue = value;
+            get
+            {
+                return m_MinValue;
+            }
+
+            set
+            {
+                m_MinValue = value;
+            }
         }
 
         public float MaxValue
         {
-            get => m_MaxValue;
-            set => m_MaxValue = value;
+            get
+            {
+                return m_MaxValue;
+            }
+
+            set
+            {
+                m_MaxValue = value;
+            }
         }
     }
 }
