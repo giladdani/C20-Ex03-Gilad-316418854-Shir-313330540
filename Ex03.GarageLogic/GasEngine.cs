@@ -31,7 +31,19 @@ namespace Ex03.GarageLogic
         {
             if(m_FuelType == i_FuelType)
             {
-                m_CurrentEnergyAmount += i_FuelAmountToAdd;
+                try
+                {
+                    CurrentEnergyAmount += i_FuelAmountToAdd;
+                }
+                catch(ValueOutOfRangeException exception)
+                {
+                    float maxPossibleAddition = exception.MaxValue - CurrentEnergyAmount;
+                    string fuelOverflowMessage = string.Format(
+                        "Cannot fill over {0}, maximum addition is {1}.",
+                        exception.MaxValue,
+                        maxPossibleAddition);
+                    throw new Exception(fuelOverflowMessage);
+                }
             }
             else
             {
