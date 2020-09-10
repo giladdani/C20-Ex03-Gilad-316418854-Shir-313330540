@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
             string manufacturerMessage = string.Format("Enter wheel manufacturer name:");
             string maxAirPressureMessage = string.Format("Enter current air pressure (from 0 to {0}):", r_MaxAirPressure);
             requests.Add(new VehicleDataRequest(manufacturerMessage, VehicleDataRequest.eRequestType.String));
-            requests.Add(new VehicleDataRequest(maxAirPressureMessage, VehicleDataRequest.eRequestType.NumericRange, 0, m_MaxAirPressure));
+            requests.Add(new VehicleDataRequest(maxAirPressureMessage, VehicleDataRequest.eRequestType.NumericRange, 0, r_MaxAirPressure));
 
             return requests;
         }
