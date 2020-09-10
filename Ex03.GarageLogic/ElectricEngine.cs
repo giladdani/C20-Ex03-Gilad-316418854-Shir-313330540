@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         // Public Methods
         public void ChargeBattery(float i_HoursToCharge)
         {
-            m_CurrentEnergyAmount += i_HoursToCharge;
+            CurrentEnergyAmount += i_HoursToCharge;
         }
     }
 }

@@ -270,7 +270,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Enter amount of minutes to charge:");
                     float minutesToCharge = float.Parse(getNumberStringFromUser());
-                    if (minutesToCharge <= 0)
+                    if (minutesToCharge >= 0)
                     {
                         float hoursToCharge = minutesToCharge / 60;
                         m_Garage.ChargeElectricVehicleBattery(licenseNumber, hoursToCharge);

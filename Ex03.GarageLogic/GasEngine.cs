@@ -31,7 +31,7 @@ namespace Ex03.GarageLogic
         {
             if(m_FuelType == i_FuelType)
             {
-                m_CurrentEnergyAmount += i_FuelAmountToAdd;
+               CurrentEnergyAmount += i_FuelAmountToAdd;
             }
             else
             {
