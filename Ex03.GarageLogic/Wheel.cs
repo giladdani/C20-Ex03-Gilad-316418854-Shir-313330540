@@ -6,14 +6,14 @@ namespace Ex03.GarageLogic
     public class Wheel
     {
         // Private Members
-        private string m_Manufacturer;
+        private readonly float r_MaxAirPressure;
         private float m_CurrentAirPressure;
-        private float m_MaxAirPressure;
+        private string m_Manufacturer;
 
         // Constructor
         public Wheel(float i_MaxAirPressure)
         {
-            m_MaxAirPressure = i_MaxAirPressure;
+            r_MaxAirPressure = i_MaxAirPressure;
         }
 
         // Public Methods
@@ -21,9 +21,9 @@ namespace Ex03.GarageLogic
         {
             List<VehicleDataRequest> requests = new List<VehicleDataRequest>();
             string manufacturerMessage = string.Format("Enter wheel manufacturer name:");
-            string maxAirPressureMessage = string.Format("Enter current air pressure (from 0 to {0}):", m_MaxAirPressure);
+            string maxAirPressureMessage = string.Format("Enter current air pressure (from 0 to {0}):", r_MaxAirPressure);
             requests.Add(new VehicleDataRequest(manufacturerMessage, VehicleDataRequest.eRequestType.String));
-            requests.Add(new VehicleDataRequest(maxAirPressureMessage, VehicleDataRequest.eRequestType.NumericRange, 0, m_MaxAirPressure));
+            requests.Add(new VehicleDataRequest(maxAirPressureMessage, VehicleDataRequest.eRequestType.NumericRange, 0, r_MaxAirPressure));
 
             return requests;
         }
@@ -46,9 +46,9 @@ namespace Ex03.GarageLogic
 
         public void FillToMaxAir()
         {
-            if (m_CurrentAirPressure < m_MaxAirPressure)
+            if (m_CurrentAirPressure < r_MaxAirPressure)
             {
-                AddAir(m_MaxAirPressure - m_CurrentAirPressure);
+                AddAir(r_MaxAirPressure - m_CurrentAirPressure);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Ex03.GarageLogic
                 "Manufacturer: {0}, Current air pressure: {1}, Maximum air pressure: {2}",
                 m_Manufacturer,
                 m_CurrentAirPressure,
-                m_MaxAirPressure);
+                r_MaxAirPressure);
         }
 
         // Properties
@@ -84,13 +84,13 @@ namespace Ex03.GarageLogic
 
             set
             {
-                if(value <= m_MaxAirPressure)
+                if(value <= r_MaxAirPressure)
                 {
                     m_CurrentAirPressure = value;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(0, m_MaxAirPressure - m_CurrentAirPressure, value);
+                    throw new ValueOutOfRangeException(0, r_MaxAirPressure - m_CurrentAirPressure, value);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_MaxAirPressure;
+                return r_MaxAirPressure;
             }
         }
     }
