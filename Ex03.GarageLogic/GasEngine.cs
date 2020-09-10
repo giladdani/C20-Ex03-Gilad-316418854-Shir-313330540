@@ -26,23 +26,6 @@ namespace Ex03.GarageLogic
             Soler = 4
         }
 
-        // Static Methods
-        public static bool IsFuelTypeInRange(int fuelType)
-        {
-            bool isTypeInRange;
-
-            if (fuelType > k_MaxFuelTypeValue || fuelType < k_MinFuelTypeValue)
-            {
-                isTypeInRange = false;
-            }
-            else
-            {
-                isTypeInRange = true;
-            }
-
-            return isTypeInRange;
-        }
-
         // Public Methods
         public static bool IsFuelTypeInRange(int i_FuelType)
         {
