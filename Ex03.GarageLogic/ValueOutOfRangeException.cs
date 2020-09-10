@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
         private const string k_Message = "{0} was invalid. Values allowed are in the range {1} - {2}";
         private float m_MinValue;
         private float m_MaxValue;
-        
+
         // Constructors
         public ValueOutOfRangeException(float i_MinValue, float i_MaxValue, float i_InvalidValue) 
             : base(string.Format(k_Message, i_InvalidValue, i_MinValue, i_MaxValue))

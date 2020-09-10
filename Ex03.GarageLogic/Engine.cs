@@ -26,11 +26,6 @@ namespace Ex03.GarageLogic
             return requests;
         }
 
-        public override string ToString()
-        {
-            return string.Format("Current energy: {0}, Maximum energy: {1}", m_CurrentEnergyAmount, m_MaxEnergyAmount);
-        }
-
         // Properties
         public float CurrentEnergyAmount
         {

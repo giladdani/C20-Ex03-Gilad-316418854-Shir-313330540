@@ -44,6 +44,22 @@ namespace Ex03.GarageLogic
         }
 
         // Public Methods
+        public static bool IsFuelTypeInRange(int i_FuelType)
+        {
+            bool isTypeInRange;
+
+            if (i_FuelType > k_MaxFuelTypeValue || i_FuelType < k_MinFuelTypeValue)
+            {
+                isTypeInRange = false;
+            }
+            else
+            {
+                isTypeInRange = true;
+            }
+
+            return isTypeInRange;
+        }
+
         public void AddFuel(float i_FuelAmountToAdd, eFuelType i_FuelType)
         {
             if(m_FuelType == i_FuelType)
@@ -70,7 +86,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}, Fuel Type: {1}", base.ToString(), FuelType);
+            return string.Format("Current fuel amount: {0} liters, Maximum fuel amount: {1} liters, Fuel type: {2}", m_CurrentEnergyAmount, m_MaxEnergyAmount, m_FuelType);
         }
 
         // Properties

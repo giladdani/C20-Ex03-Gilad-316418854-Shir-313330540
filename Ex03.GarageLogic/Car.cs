@@ -58,9 +58,9 @@ namespace Ex03.GarageLogic
         {
             return string.Format(
                 "{0}Color: {1}, Number of doors: {2}{3}", 
-                base.ToString(), 
-                m_Color, 
-                m_DoorsAmount,  
+                base.ToString(),
+                m_Color,
+                m_DoorsAmount,
                 Environment.NewLine);
         }
 

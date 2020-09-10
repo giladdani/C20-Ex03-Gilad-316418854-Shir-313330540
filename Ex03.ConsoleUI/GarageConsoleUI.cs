@@ -45,7 +45,7 @@ namespace Ex03.ConsoleUI
 4. Fill air pressure of vehicle wheel
 5. Fill fuel of gas vehicle
 6. Charge battery of electric vehicle
-7. Show Full details of a vehicle
+7. Show full details of a vehicle
 8. Exit garage"));
 
             chooseOptionFromMenu();

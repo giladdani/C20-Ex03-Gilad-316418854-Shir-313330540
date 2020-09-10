@@ -49,8 +49,8 @@ namespace Ex03.GarageLogic
         {
             return string.Format(
                 "{0}MotorBike License Type: {1}, Engine Capacity: {2}{3}",
-                base.ToString(), 
-                m_LicenseType, 
+                base.ToString(),
+                m_LicenseType,
                 m_EngineCapacity, 
                 Environment.NewLine);
         }
