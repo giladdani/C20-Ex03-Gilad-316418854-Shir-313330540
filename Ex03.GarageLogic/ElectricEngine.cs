@@ -13,7 +13,19 @@ namespace Ex03.GarageLogic
         // Public Methods
         public void ChargeBattery(float i_HoursToCharge)
         {
-            CurrentEnergyAmount += i_HoursToCharge;
+            try
+            {
+                CurrentEnergyAmount += i_HoursToCharge;
+            }
+            catch (ValueOutOfRangeException exception)
+            {
+                float maxPossibleAddition = exception.MaxValue - CurrentEnergyAmount;
+                string batteryOverflowMessage = string.Format(
+                    "Cannot fill over {0}, maximum addition is {1}.",
+                    exception.MaxValue,
+                    maxPossibleAddition);
+                throw new Exception(batteryOverflowMessage);
+            }
         }
     }
 }

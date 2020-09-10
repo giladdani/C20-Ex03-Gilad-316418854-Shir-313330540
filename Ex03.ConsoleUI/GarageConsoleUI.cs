@@ -83,6 +83,7 @@ namespace Ex03.ConsoleUI
             }
             finally
             {
+                endOperation();
                 PrintMenu();
             }
         }
@@ -162,8 +163,6 @@ namespace Ex03.ConsoleUI
                 createVehicle(licenseNumber);
                 Console.WriteLine("Vehicle created successfully.");
             }
-
-            endOperation();
         }
 
         private void showLicenseNumbersByFilter()
@@ -194,8 +193,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("No vehicle licenses were found.");
             }
-
-            endOperation();
         }
 
         private void changeVehicleStatus()
@@ -212,8 +209,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Vehicle was not found in garage.");
             }
-
-            endOperation();
         }
 
         private void fillMaxAirToVehicleWheels()
@@ -229,8 +224,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Vehicle was not found in garage.");
             }
-
-            endOperation();
         }
 
         private void fillGasVehicleFuel()
@@ -256,8 +249,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Vehicle was not found in garage.");
             }
-
-            endOperation();
         }
 
         private void chargeElectricVehicleBattery()
@@ -270,7 +261,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Enter amount of minutes to charge:");
                     float minutesToCharge = float.Parse(getNumberStringFromUser());
-                    if (minutesToCharge >= 0)
+                    if (minutesToCharge > 0)
                     {
                         float hoursToCharge = minutesToCharge / 60;
                         m_Garage.ChargeElectricVehicleBattery(licenseNumber, hoursToCharge);
@@ -290,8 +281,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Vehicle was not found in garage.");
             }
-
-            endOperation();
         }
 
         private void showAllVehicleDetails()
@@ -306,8 +295,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Vehicle was not found in garage.");
             }
-
-            endOperation();
         }
 
         private string getNumberStringFromUser()
