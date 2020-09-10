@@ -49,21 +49,25 @@ namespace Ex03.GarageLogic
                         isValid = StringValidator.isStringYesOrNo(i_GivenData);
                         break;
                     }
+
                 case eRequestType.String:
                     {
                         isValid = !string.IsNullOrEmpty(i_GivenData);
                         break;
                     }
+
                 case eRequestType.Number:
                     {
                         isValid = StringValidator.isStringANumber(i_GivenData);
                         break;
                     }
+
                 case eRequestType.NumericRange:
                     {
                         isValid = StringValidator.isStringANumber(i_GivenData) && StringValidator.isStringNumberInRange(i_GivenData, m_MinValue, m_MaxValue);
                         break;
                     }
+
                 default:
                     {
                         isValid = false;

@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         private eDoorsAmount m_DoorsAmount;
 
         // Constructors
-        public Car( string i_LicenseNumber, Engine i_Engine)
+        public Car(string i_LicenseNumber, Engine i_Engine)
             : base(i_LicenseNumber, eWheelsAmount.Four, 32, i_Engine)
         {
         }
@@ -56,8 +56,12 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}Color: {1}, Number of doors: {2}{3}", 
-                base.ToString(), m_Color, m_DoorsAmount,  Environment.NewLine);
+            return string.Format(
+                "{0}Color: {1}, Number of doors: {2}{3}", 
+                base.ToString(),
+                m_Color,
+                m_DoorsAmount,
+                Environment.NewLine);
         }
 
         // Properties

@@ -7,9 +7,9 @@ namespace Ex03.GarageLogic
     public class GasEngine : Engine
     {
         // Private Members
-        private eFuelType m_FuelType;
         private const int k_MinFuelTypeValue = 1;
         private const int k_MaxFuelTypeValue = 4;
+        private eFuelType m_FuelType;
 
         // Constructors
         public GasEngine(eFuelType i_FuelType, float i_MaxEnergyAmount) : base(i_MaxEnergyAmount)
@@ -27,6 +27,22 @@ namespace Ex03.GarageLogic
         }
 
         // Public Methods
+        public static bool IsFuelTypeInRange(int i_FuelType)
+        {
+            bool isTypeInRange;
+
+            if (fuelType > k_MaxFuelTypeValue || fuelType < k_MinFuelTypeValue)
+            {
+                isTypeInRange = false;
+            }
+            else
+            {
+                isTypeInRange = true;
+            }
+
+            return isTypeInRange;
+        }
+
         public void AddFuel(float i_FuelAmountToAdd, eFuelType i_FuelType)
         {
             if(m_FuelType == i_FuelType)
@@ -49,22 +65,6 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Cannot fill wrong fuel type");
             }
-        }
-
-        public static bool IsFuelTypeInRange(int fuelType)
-        {
-            bool isTypeInRange;
-
-            if (fuelType > k_MaxFuelTypeValue || fuelType < k_MinFuelTypeValue)
-            {
-                isTypeInRange = false;
-            }
-            else
-            {
-                isTypeInRange = true;
-            }
-
-            return isTypeInRange;
         }
 
         public override string ToString()

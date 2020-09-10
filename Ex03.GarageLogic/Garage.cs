@@ -6,9 +6,9 @@ namespace Ex03.GarageLogic
     public class Garage
     {
         // Private Members
-        private Dictionary<string, GarageVehicle> m_GarageVehicles;
         private const int k_MinVehicleStatusValue = 1;
         private const int k_MaxVehicleStatusValue = 3;
+        private Dictionary<string, GarageVehicle> m_GarageVehicles;
 
         // Constructors
         public Garage()

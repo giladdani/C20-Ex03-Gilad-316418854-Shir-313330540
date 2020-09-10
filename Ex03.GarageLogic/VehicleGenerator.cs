@@ -47,7 +47,6 @@ namespace Ex03.GarageLogic
             {
                 case eVehicleType.ElectricMotorBike:
                     {
-
                         createdVehicle = createElectricMotorBike(i_LicenseNumber);
                         break;
                     }

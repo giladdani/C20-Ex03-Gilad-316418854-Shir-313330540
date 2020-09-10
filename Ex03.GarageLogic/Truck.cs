@@ -27,6 +27,7 @@ namespace Ex03.GarageLogic
 
             return requests;
         }
+
         public override void UpdateVehicleData(List<string> i_DataList)
         {
             base.UpdateVehicleData(i_DataList);
@@ -36,8 +37,12 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}Is truck containing hazardous substances: {1}, Cargo size: {2}{3}",
-                base.ToString(), m_IsHazardous.ToString(), m_CargoSize, Environment.NewLine);
+            return string.Format(
+                "{0}Is truck containing hazardous substances: {1}, Cargo size: {2}{3}",
+                base.ToString(),
+                m_IsHazardous.ToString(),
+                m_CargoSize,
+                Environment.NewLine);
         }
 
         // Properties
