@@ -8,9 +8,9 @@ namespace Ex03.ConsoleUI
     public class GarageConsoleUI
     {
         // Private Members
-        private Garage m_Garage;
         private const int k_MinMenuOptionValue = 1;
         private const int k_MaxMenuOptionValue = 8;
+        private Garage m_Garage;
 
         // Public Methods
         public void Start()
@@ -329,7 +329,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("Invalid choice. Enter a valid fuel type:");
                 fuelType = int.Parse(Console.ReadLine());
-
             }
 
             return fuelType;
@@ -339,7 +338,7 @@ namespace Ex03.ConsoleUI
         {
             float fuelAmount;
             string userInput = Console.ReadLine();
-            while(!float.TryParse(userInput, out fuelAmount) || fuelAmount < 0)
+            while(!float.TryParse(userInput, out fuelAmount) || fuelAmount <= 0)
             {
                 Console.WriteLine("Fuel amount must be a valid positive fuel amount, enter again: ");
                 userInput = Console.ReadLine();

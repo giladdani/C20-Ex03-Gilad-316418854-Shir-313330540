@@ -49,7 +49,6 @@ namespace Ex03.GarageLogic
                 {
                     throw new ValueOutOfRangeException(0, m_MaxEnergyAmount, value);
                 }
-
             }
         }
 
