@@ -65,7 +65,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_LicenseType = value;  // @ Add validations and exceptions
+                m_LicenseType = value;
             }
         }
 
@@ -78,7 +78,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_EngineCapacity = value;   // @ Add validations and exceptions
+                m_EngineCapacity = value;
             }
         }
     }

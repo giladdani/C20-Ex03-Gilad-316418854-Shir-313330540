@@ -74,7 +74,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_Color = value; // @ Add validations and exceptions
+                m_Color = value;
             }
         }
 
@@ -87,7 +87,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_DoorsAmount = value;       // @ Add validations and exceptions
+                m_DoorsAmount = value;
             }
         }
     }

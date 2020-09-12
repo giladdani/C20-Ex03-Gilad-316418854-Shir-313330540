@@ -56,7 +56,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_IsHazardous = value;            // @ Add validations and exceptions
+                m_IsHazardous = value;
             }
         }
 
@@ -69,7 +69,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_CargoSize = value;    // @ Add validations and exceptions
+                m_CargoSize = value;
             }
         }
     }

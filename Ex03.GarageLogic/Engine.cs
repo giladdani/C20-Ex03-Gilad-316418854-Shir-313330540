@@ -56,7 +56,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                m_MaxEnergyAmount = value;       // @ validations and exception?
+                m_MaxEnergyAmount = value;
             }
         }
     }
